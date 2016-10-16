@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SgcAdmin\Models\User;
 
 class UserTableSeeder extends Seeder
 {
@@ -20,29 +21,5 @@ class UserTableSeeder extends Seeder
                 'remember_token' => str_random(10),
             ]
         );
-
-        factory(User::class)->create(
-            [
-                'name' => 'Chefe',
-                'email' => 'chefe@devyzi.com',
-                'password' => bcrypt('123456'),
-                'role' => 'boss',
-                'remember_token' => str_random(10),
-            ]
-        );
-
-        factory(User::class)->create(
-            [
-                'name' => 'Vendedor',
-                'email' => 'vendedor@devyzi.com',
-                'password' => bcrypt('123456'),
-                'role' => 'salesman',
-                'remember_token' => str_random(10),
-            ]
-        );
-
-        /*factory(User::class, 10)->create()->each(function ($u){
-            $u->client()->save(factory(Client::class)->make());
-        });*/
     }
 }

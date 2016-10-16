@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => SgcAdmin\User::class,
+            'model' => SgcAdmin\Models\User::class,
         ],
 
         // 'users' => [

@@ -5,10 +5,12 @@ namespace SgcAdmin\Models;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Model implements Transformable
+class User extends Authenticatable implements Transformable
 {
-    use TransformableTrait;
+    use TransformableTrait, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -27,5 +29,4 @@ class User extends Model implements Transformable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
 }
