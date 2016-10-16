@@ -15,6 +15,10 @@ Route::get('/', function (){
     return Redirect::to(route('auth.login'));
 });
 
+Route::get('/login', function (){
+    return Redirect::to(route('auth.login'));
+});
+
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function (){
     // Login Routes...
     Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
