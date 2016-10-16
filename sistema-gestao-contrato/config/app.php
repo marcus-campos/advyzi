@@ -162,6 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
 
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
@@ -180,6 +181,7 @@ return [
         // SgcAdmin\Providers\BroadcastServiceProvider::class,
         SgcAdmin\Providers\EventServiceProvider::class,
         SgcAdmin\Providers\RouteServiceProvider::class,
+        SgcAdmin\Providers\RepositoryServiceProvider::class,
 
     ],
 
@@ -228,6 +230,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

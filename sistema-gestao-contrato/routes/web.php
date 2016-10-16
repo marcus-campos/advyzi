@@ -47,9 +47,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', function (){
            return redirect()->route('admin.dashboard.index');
         });
+
+        //Dashboard
         Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'DashboardController@index']);
         });
 
+        //User
+        Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'UsersController@index']);
+            Route::post('store', ['as' => 'store', 'uses' => 'UsersController@store']);
+            Route::put('update', ['as' => 'update', 'uses' => 'UsersController@update']);
+        });
     });
 });
