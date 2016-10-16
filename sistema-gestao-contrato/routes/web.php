@@ -36,3 +36,16 @@ Route::group(['prefix' => 'password', 'as' => 'password.'], function (){
         Route::get('reset/{token}', ['as' => 'token', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
     });
 });
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function (){
+
+        Route::get('/', function (){
+           return redirect()->route('admin.dashboard.index');
+        });
+        Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'DashboardController@index']);
+        });
+
+    });
+});
