@@ -53,6 +53,15 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'DashboardController@index']);
         });
 
+        //CustomerContracts
+        Route::group(['prefix' => 'contract', 'as' => 'contract.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'CustomerContractsController@index']);
+            Route::post('store', ['as' => 'store', 'uses' => 'CustomerContractsController@store']);
+            Route::get('destroy/{id}', ['as' => 'delete', 'uses' => 'CustomerContractsController@destroy']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CustomerContractsController@edit']);
+            Route::put('update/{id}', ['as' => 'update', 'uses' => 'CustomerContractsController@update']);
+        });
+
         //Operator
         Route::group(['prefix' => 'operator', 'as' => 'operator.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'OperatorsController@index']);

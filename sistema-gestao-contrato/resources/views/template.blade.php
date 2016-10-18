@@ -51,10 +51,9 @@
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.3.6
+            <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-        reserved.
+        <strong>Powered by <a href="http://devyzi.com">Devyzi</a>. 2016 - {{ date('Y') }} </strong>.
     </footer>
 
     <!-- Control Sidebar -->

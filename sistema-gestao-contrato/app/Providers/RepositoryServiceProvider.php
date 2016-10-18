@@ -9,7 +9,14 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
 
-        //User
+        //CustomerContracts
+
+        $this->app->bind(
+            'SgcAdmin\Repositories\CustomerContractsRepository',
+            'SgcAdmin\Repositories\CustomerContractsRepositoryEloquent'
+        );
+
+        //Operator
 
         $this->app->bind(
             'SgcAdmin\Repositories\OperatorRepository',

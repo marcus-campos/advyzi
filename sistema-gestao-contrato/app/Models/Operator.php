@@ -14,4 +14,8 @@ class Operator extends Model implements Transformable
         'name'
     ];
 
+    public function contracts()
+    {
+        return $this->hasMany(CustomerContracts::class);
+    }
 }
