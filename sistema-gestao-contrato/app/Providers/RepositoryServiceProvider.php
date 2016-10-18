@@ -8,6 +8,14 @@ class RepositoryServiceProvider extends ServiceProvider
 {
     public function register()
     {
+
+        //User
+
+        $this->app->bind(
+            'SgcAdmin\Repositories\OperatorRepository',
+            'SgcAdmin\Repositories\OperatorRepositoryEloquent'
+        );
+
         //User
 
         $this->app->bind(

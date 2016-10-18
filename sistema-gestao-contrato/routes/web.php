@@ -53,11 +53,22 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'DashboardController@index']);
         });
 
+        //Operator
+        Route::group(['prefix' => 'operator', 'as' => 'operator.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'OperatorsController@index']);
+            Route::post('store', ['as' => 'store', 'uses' => 'OperatorsController@store']);
+            Route::get('destroy/{id}', ['as' => 'delete', 'uses' => 'OperatorsController@destroy']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'OperatorsController@edit']);
+            Route::put('update/{id}', ['as' => 'update', 'uses' => 'OperatorsController@update']);
+        });
+
         //User
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'UsersController@index']);
             Route::post('store', ['as' => 'store', 'uses' => 'UsersController@store']);
-            Route::put('update', ['as' => 'update', 'uses' => 'UsersController@update']);
+            Route::get('destroy/{id}', ['as' => 'delete', 'uses' => 'UsersController@destroy']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'UsersController@edit']);
+            Route::put('update/{id}', ['as' => 'update', 'uses' => 'UsersController@update']);
         });
     });
 });
