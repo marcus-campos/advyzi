@@ -36,7 +36,7 @@
                             <tr>
                                 <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->name }}</td>
                                 <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->operator->name }}</td>
-                                <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ getDaysBetweenDates(formatDate($contract->end_date, 'dmy')) }} dias</td>
+                                <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ getDaysBetweenDates(formatDate($contract->end_date, 'mdy')) }} dias</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>

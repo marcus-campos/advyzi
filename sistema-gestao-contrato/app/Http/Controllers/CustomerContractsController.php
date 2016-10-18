@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use SgcAdmin\Http\Requests;
+use Carbon\Carbon;
 use SgcAdmin\Http\Requests\CustomerContractsRequest;
 use SgcAdmin\Repositories\CustomerContractsRepository;
 use SgcAdmin\Repositories\OperatorRepository;
@@ -33,7 +34,7 @@ class CustomerContractsController extends Controller
 
     public function index()
     {
-        $contracts = $this->customerContractsRepository->all();
+        $contracts = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]]);
         $operators = $this->operatorRepository->all()->pluck('name','id');
 
         return view(
@@ -46,9 +47,8 @@ class CustomerContractsController extends Controller
     public function store(CustomerContractsRequest $request)
     {
         $contract = $request->all();
-
-        $contract['start_date'] = formatDate($contract['start_date'], 'db');
-        $contract['end_date'] = formatDate($contract['end_date'], 'db');
+        $contract['start_date'] = Carbon::createFromFormat('d/m/Y', $contract['start_date']);
+        $contract['end_date'] = Carbon::createFromFormat('d/m/Y', $contract['end_date']);
         $contract['user_id'] = Auth::user()->id;
 
 
@@ -67,8 +67,11 @@ class CustomerContractsController extends Controller
 
     public function edit($id)
     {
-        $contracts = $this->customerContractsRepository->all();
+        $contracts = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]]);
         $contractEdit = $this->customerContractsRepository->find($id);
+        $contractEdit->start_date = Carbon::parse($contractEdit->start_date)->format('d/m/Y');
+        $contractEdit->end_date = Carbon::parse($contractEdit->end_date)->format('d/m/Y');
+       // dd($contractEdit);
         $operators = $this->operatorRepository->all()->pluck('name','id');
 
         return view(
@@ -81,8 +84,8 @@ class CustomerContractsController extends Controller
     public function update(CustomerContractsRequest $request, $id)
     {
         $contract = $request->all();
-        $contract['start_date'] = formatDate($contract['start_date'], 'db');
-        $contract['end_date'] = formatDate($contract['end_date'], 'db');
+        $contract['start_date'] = Carbon::createFromFormat('Y/m/d', $contract['start_date']);
+        $contract['end_date'] = Carbon::createFromFormat('Y/m/d', $contract['end_date']);
         $contract['user_id'] = Auth::user()->id;
 
         $this->operatorRepository->update($request->all(), $id);

@@ -31,31 +31,18 @@ function roles()
 function formatDate($date, $type)
 {
     $type = explode(':', $type); // Explode second param ex: formatDate('2016/10/14', 'db:start')
-
     if($date != null)
     {
         if($type[0] == 'dmy')
         {
-            if(isset($type[1])) {
-                if ($type[1] == 'hour')
-                    $date = date('d/m/Y H:i:s', strtotime($date));
-            }
-            else
-            {
-                $date = date('d/m/Y', strtotime($date));
-            }
+            $date = date('d/m/Y', strtotime($date));
+        }
+        else if($type[0] == 'mdy'){
+            $date = date('m/d/Y', strtotime($date));
         }
         else if($type[0] == 'ymd')
         {
-            if(isset($type[1])) {
-                if ($type[1] == 'hour')
-                    $date = date('Y/m/d H:i:s', strtotime($date));
-            }
-            else
-            {
-                $date = date('Y/m/d', strtotime($date));
-            }
-
+            $date = date('Y/m/d', strtotime($date));
         }
         else if($type[0] = 'db')
         {
@@ -66,10 +53,8 @@ function formatDate($date, $type)
                     $date = date('Y-m-d', strtotime($date)) . ' 23:59:59';
                 }
             }
-            else {
-                return strtotime($date);
+            else
                 $date = date('Y-m-d', strtotime($date));
-            }
         }
     }
 
