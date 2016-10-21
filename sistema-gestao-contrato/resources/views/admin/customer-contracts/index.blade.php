@@ -6,7 +6,7 @@
 @extends('vendor.admin.page.title-page')
 
 @section('content')
-    <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-contract">{{ isset($contractEdit) ? 'Editar contrato' : 'Novo contrato' }}</a></p>
+    <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-contract">{{ isset($contractEdit) ? 'Editar cliente' : 'Novo cliente' }}</a></p>
     <div class="box">
         <div class="box-body">
             <div class="box-body">
@@ -70,16 +70,15 @@
     <div id="modal-contract" class="modal fade" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 <div class="modal-header">
                     <a href="{{ route('admin.contract.index') }}" type="button" class="close" aria-hidden="true">×</a>
                     <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
                     @if(isset($contractEdit))
                         {!! Form::model($contractEdit,['route' => ['admin.contract.update', $contractEdit->id], 'method'=>'put']) !!}
-                        <h4 class="modal-title">Editar contrato</h4>
+                        <h4 class="modal-title">Editar cliente</h4>
                     @else
                         {!! Form::open(['route'=>'admin.contract.store', 'method'=>'post']) !!}
-                        <h4 class="modal-title">Novo contrato</h4>
+                        <h4 class="modal-title">Novo cliente</h4>
                     @endif
                 </div>
                 <div class="modal-body">
@@ -89,46 +88,46 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Nome:</label>
-                                        {!! Form::text('name', null,['class' => 'form-control', 'placeholder' => 'Ex: Marcus Vinícius Campos']) !!}
+                                        {!! Form::text('name', null,['class' => 'form-control', 'placeholder' => 'Ex: Rúben Lascasas']) !!}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Email:</label>
-                                        {!! Form::email('email', null,['class' => 'form-control', 'placeholder' => 'Ex: marcus.campos@devyzi.com']) !!}
+                                        {!! Form::email('email', null,['class' => 'form-control', 'placeholder' => 'Ex: geral@rubenlascasas.com']) !!}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Endereço:</label>
-                                        {!! Form::text('address', null,['class' => 'form-control']) !!}
+                                        {!! Form::text('address', null,['class' => 'form-control', 'placeholder' => 'Ex: Rua ABC']) !!}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Região:</label>
-                                        {!! Form::text('region', null,['class' => 'form-control']) !!}
+                                        {!! Form::text('region', null,['class' => 'form-control', 'placeholder' => 'Ex: Gondomar, Rio Tinto...']) !!}
 
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Cidade:</label>
-                                        {!! Form::text('city', null,['class' => 'form-control']) !!}
+                                        {!! Form::text('city', null,['class' => 'form-control', 'placeholder' => 'Ex: Porto']) !!}
 
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">NIF:</label>
-                                        {!! Form::text('nif', null,['class' => 'form-control']) !!}
+                                        {!! Form::text('nif', null,['class' => 'form-control', 'placeholder' => 'Ex: 999999999']) !!}
 
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">O que contratou?</label>
-                                        {!! Form::text('which_hired', null,['class' => 'form-control']) !!}
+                                        {!! Form::text('which_hired', null,['class' => 'form-control', 'placeholder' => 'Ex: Internet, tv...']) !!}
 
                                     </div>
                                 </div>
@@ -163,7 +162,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Observações</label>
-                                        {!! Form::textarea('description', null,['class' => 'form-control']) !!}
+                                        {!! Form::textarea('description', null,['class' => 'form-control', 'placeholder' => 'Ex: Pacote de internet com velocidade de ...']) !!}
                                     </div>
                                 </div>
 

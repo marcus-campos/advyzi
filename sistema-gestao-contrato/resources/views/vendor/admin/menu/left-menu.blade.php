@@ -7,13 +7,13 @@
                 <li class="header">PAINEL DE INSTRUMENTOS</li>
                 <li class="treeview">
                     <a href="{{ route('admin.dashboard.index') }}">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        <i class="fa fa-dashboard"></i> <span>Resumo</span>
                     </a>
                 </li>
-                <li class="header">REGISTROS</li>
+                <li class="header">Menu</li>
                 <li class="treeview">
                     <a href="{{ route('admin.contract.index') }}">
-                        <i class="fa fa-file-text-o"></i> <span>Contratos</span>
+                        <i class="fa fa-users"></i> <span>Clientes</span>
                     </a>
                 </li>
                 <li class="treeview">
@@ -21,11 +21,13 @@
                         <i class="fa fa-building-o"></i> <span>Operadoras</span>
                     </a>
                 </li>
+                @if(Auth::user()->role == 'boss' || Auth::user()->role == 'admin')
                 <li class="treeview">
                     <a href="{{ route('admin.user.index') }}">
-                        <i class="fa fa-user"></i> <span>Usuários</span>
+                        <i class="fa fa-user"></i> <span>Utilizadores</span>
                     </a>
                 </li>
+                @endif
             </ul>
         </section>
         <!-- /.sidebar -->

@@ -17,7 +17,7 @@ class OperatorsController extends Controller
     {
         $this->breadcrumbs = [
             'title' => 'Operadoras',
-            'page' => 'Cadastros',
+            'page' => 'Registros',
             'fa' => 'fa-building-o'
         ];
 

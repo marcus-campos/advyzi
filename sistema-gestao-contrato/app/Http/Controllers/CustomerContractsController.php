@@ -23,8 +23,8 @@ class CustomerContractsController extends Controller
     public function __construct(CustomerContractsRepository $customerContractsRepository, OperatorRepository $operatorRepository)
     {
         $this->breadcrumbs = [
-            'title' => 'Contratos',
-            'page' => 'Cadastros',
+            'title' => 'Clientes',
+            'page' => 'Registros',
             'fa' => 'fa-users'
         ];
 
@@ -90,5 +90,10 @@ class CustomerContractsController extends Controller
 
         $this->operatorRepository->update($request->all(), $id);
         return redirect()->route('admin.contract.index');
+    }
+
+    public function contracts()
+    {
+        return $contracts = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id], ['end_date', '>=', Carbon::now()->toDateString()], ['end_date', '<=', Carbon::now()->addDays(30)->toDateString()]])->count();
     }
 }

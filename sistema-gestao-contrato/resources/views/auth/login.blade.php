@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SGC Admin</title>
+    <title>Gestor Inideia</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -27,7 +27,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="http://devyzi.com"><b>SGC </b>Admin</a>
+        <a href="http://devyzi.com"><b>Gestor </b>Inideia</a>
     </div>
     @if (isset($errors) && count($errors) > 0)
         <div class="alert alert-danger">
@@ -89,10 +89,13 @@
 
 <!-- jQuery 2.2.3 -->
 <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Angular-->
+<script src="../../plugins/km/angular.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../../bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="../../plugins/iCheck/icheck.min.js"></script>
+
 <script>
     $(function () {
         $('input').iCheck({

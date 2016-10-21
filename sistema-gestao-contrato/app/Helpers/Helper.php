@@ -69,3 +69,9 @@ function getDaysBetweenDates($date)
 
     return floor($datediff / (60 * 60 * 24));
 }
+
+function contracts()
+{
+    $contract = App::make('SgcAdmin\Http\Controllers\CustomerContractsController');
+    return $contract->contracts();
+}

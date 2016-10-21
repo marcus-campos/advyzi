@@ -8,6 +8,8 @@
 
     <!-- jQuery 2.2.3 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Angular-->
+    <script src="../../plugins/km/angular.js"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <!-- FastClick -->

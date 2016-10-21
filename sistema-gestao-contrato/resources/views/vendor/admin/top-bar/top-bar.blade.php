@@ -15,11 +15,6 @@
                     <ul class="dropdown-menu">
                         <!-- Menu Body -->
                         <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-12 text-center">
-                                    <a href="#" class="btn btn-flat">Perfil</a>
-                                </div>
-                            </div>
                             <!-- /.row -->
                             <div class="row">
                                 <div class="col-xs-12 text-center">

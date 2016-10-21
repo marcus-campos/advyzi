@@ -7,21 +7,27 @@ use Illuminate\Http\Request;
 use SgcAdmin\Http\Requests;
 use SgcAdmin\Http\Requests\UsersRequest;
 use SgcAdmin\Repositories\UserRepository;
+use SgcAdmin\Services\UsersService;
 
 class UsersController extends Controller
 {
     private $breadcrumbs;
     private $userRepository;
+    /**
+     * @var UsersService
+     */
+    private $usersService;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, UsersService $usersService)
     {
         $this->breadcrumbs = [
             'title' => 'Usuários',
-            'page' => 'Cadastros',
+            'page' => 'Registros',
             'fa' => 'fa-users'
         ];
 
         $this->userRepository = $userRepository;
+        $this->usersService = $usersService;
     }
 
     public function index()
@@ -37,7 +43,7 @@ class UsersController extends Controller
 
     public function store(UsersRequest $request)
     {
-        $this->userRepository->create($request->all());
+        $this->usersService->store($request->all());
 
         return redirect()->route('admin.user.index');
     }
