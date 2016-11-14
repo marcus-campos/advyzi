@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use SgcAdmin\Http\Requests;
 use Carbon\Carbon;
 use SgcAdmin\Http\Requests\CustomerContractsRequest;
+use SgcAdmin\Repositories\ContractsRepository;
 use SgcAdmin\Repositories\CustomerContractsRepository;
 use SgcAdmin\Repositories\OperatorRepository;
 
@@ -16,25 +17,38 @@ class CustomerContractsController extends Controller
     private $breadcrumbs;
     private $operatorRepository;
     /**
+     * @var ContractsRepository
+     */
+    private $contractsRepository;
+    /**
      * @var CustomerContractsRepository
      */
     private $customerContractsRepository;
 
-    public function __construct(CustomerContractsRepository $customerContractsRepository, OperatorRepository $operatorRepository)
+    /**
+     * CustomerContractsController constructor.
+     * @param CustomerContractsRepository $customerContractsRepository
+     * @param ContractsRepository|CustomerContractsRepository $contractsRepository
+     * @param OperatorRepository $operatorRepository
+     */
+    public function __construct(CustomerContractsRepository $customerContractsRepository,
+                                ContractsRepository $contractsRepository,
+                                OperatorRepository $operatorRepository)
     {
         $this->breadcrumbs = [
             'title' => 'Clientes',
-            'page' => 'Registros',
+            'page' => 'Registos',
             'fa' => 'fa-users'
         ];
 
         $this->operatorRepository = $operatorRepository;
+        $this->contractsRepository = $contractsRepository;
         $this->customerContractsRepository = $customerContractsRepository;
     }
 
     public function index()
     {
-        $contracts = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]]);
+        $contracts = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->contracts();
         $operators = $this->operatorRepository->all()->pluck('name','id');
 
         return view(

@@ -52,7 +52,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0.0
         </div>
-        <strong>Powered by <a href="http://devyzi.com">Devyzi</a>. 2016 - {{ date('Y') }} </strong>.
+        <strong>Powered by <a href="http://inideia.com">Inideia</a>. 2016 - {{ date('Y') }} </strong>.
     </footer>
 
     <!-- Control Sidebar -->

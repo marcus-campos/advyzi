@@ -4,6 +4,7 @@ namespace SgcAdmin\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use SgcAdmin\Http\Requests;
 use SgcAdmin\Http\Requests\UsersRequest;
 use SgcAdmin\Repositories\UserRepository;
@@ -21,8 +22,8 @@ class UsersController extends Controller
     public function __construct(UserRepository $userRepository, UsersService $usersService)
     {
         $this->breadcrumbs = [
-            'title' => 'Usuários',
-            'page' => 'Registros',
+            'title' => 'Utilizadores',
+            'page' => 'Registos',
             'fa' => 'fa-users'
         ];
 
@@ -57,7 +58,11 @@ class UsersController extends Controller
 
     public function edit($id)
     {
-        $users = $this->userRepository->findWhere([['role', '<>', 'admin']]);
+        if(Auth::user()->role == 'admin')
+            $users = $this->userRepository->all();
+        else
+            $users = $this->userRepository->findWhere([['role', '<>', 'admin']]);
+
         $userEdit = $this->userRepository->find($id);
 
         return view(
@@ -69,7 +74,8 @@ class UsersController extends Controller
 
     public function update(UsersRequest $request, $id)
     {
-        $this->userRepository->update($request->all(), $id);
+        $this->usersService->update($request->all(), $id);
+
         return redirect()->route('admin.user.index');
     }
 }

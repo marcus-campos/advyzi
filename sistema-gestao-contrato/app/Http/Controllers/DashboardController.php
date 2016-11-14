@@ -29,7 +29,14 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $contracts = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id], ['end_date', '>=', Carbon::now()->toDateString()], ['end_date', '<=', Carbon::now()->addDays(30)->toDateString()]]);
+        $contracts = $this->customerContractsRepository->findWhere([
+            ['user_id', '=', Auth::user()->id]
+        ]);
+        $contracts->contracts()
+            ->findWhere([
+                ['end_date', '>=', Carbon::now()->toDateString()],
+                ['end_date', '<=', Carbon::now()->addDays(30)->toDateString()]
+            ]);
 
         return view(
             'admin.dashboard.index',

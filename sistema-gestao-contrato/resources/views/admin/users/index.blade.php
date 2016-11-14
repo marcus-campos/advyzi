@@ -85,6 +85,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
+                                        <label class="pull-left">Comissão:</label>
+                                        {!! Form::text('commission', null,['class' => 'form-control']) !!}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <label class="pull-left">Tipo de usuário:</label>
                                         {!! Form::select('role', roles(), null,['class' => 'form-control']) !!}
                                     </div>

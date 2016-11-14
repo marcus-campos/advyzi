@@ -21,10 +21,6 @@ class CreateCustomerContractsTable extends Migration
             $table->string('region');
             $table->string('city');
             $table->string('nif');
-            $table->string('which_hired');
-            $table->string('description');
-            $table->date('start_date');
-            $table->date('end_date');
             $table->unsignedInteger('operator_id');
             $table->unsignedInteger('user_id');
             $table->timestamps();

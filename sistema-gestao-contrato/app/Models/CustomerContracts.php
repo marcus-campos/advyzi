@@ -17,10 +17,6 @@ class CustomerContracts extends Model implements Transformable
         'region',
         'city',
         'nif',
-        'which_hired',
-        'description',
-        'start_date',
-        'end_date',
         'operator_id',
         'user_id'
     ];
@@ -28,5 +24,10 @@ class CustomerContracts extends Model implements Transformable
     public function operator()
     {
         return $this->belongsTo(Operator::class);
+    }
+
+    public function contracts()
+    {
+        return $this->hasMany(Contracts::class);
     }
 }
