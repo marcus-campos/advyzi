@@ -18,8 +18,4 @@ class Contract extends Model implements Transformable
         'customer_contract_id'
     ];
 
-    public function customer()
-    {
-        return $this->belongsTo(CustomerContracts::class);
-    }
 }

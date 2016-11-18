@@ -12,8 +12,8 @@ class RepositoryServiceProvider extends ServiceProvider
         //Contracts
 
         $this->app->bind(
-            'SgcAdmin\Repositories\ContractsRepository',
-            'SgcAdmin\Repositories\ContractsRepositoryEloquent'
+            'SgcAdmin\Repositories\ContractRepository',
+            'SgcAdmin\Repositories\ContractRepositoryEloquent'
         );
 
         //CustomerContracts

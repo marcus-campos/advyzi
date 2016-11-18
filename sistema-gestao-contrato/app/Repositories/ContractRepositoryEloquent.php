@@ -4,15 +4,15 @@ namespace SgcAdmin\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
+use SgcAdmin\Repositories\ContractRepository;
 use SgcAdmin\Models\Contract;
-use SgcAdmin\Repositories\ContractsRepository;
-use SgcAdmin\Validators\ContractsValidator;
+use SgcAdmin\Validators\ContractValidator;
 
 /**
- * Class ContractsRepositoryEloquent
+ * Class ContractRepositoryEloquent
  * @package namespace SgcAdmin\Repositories;
  */
-class ContractsRepositoryEloquent extends BaseRepository implements ContractsRepository
+class ContractRepositoryEloquent extends BaseRepository implements ContractRepository
 {
     /**
      * Specify Model class name

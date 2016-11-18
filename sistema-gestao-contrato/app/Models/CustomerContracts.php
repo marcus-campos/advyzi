@@ -2,6 +2,7 @@
 
 namespace SgcAdmin\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -28,6 +29,6 @@ class CustomerContracts extends Model implements Transformable
 
     public function contracts()
     {
-        return $this->hasMany(Contracts::class);
+        return $this->hasMany(Contract::class);
     }
 }

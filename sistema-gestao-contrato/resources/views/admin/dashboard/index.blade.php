@@ -17,7 +17,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text text-center">Contratos com menos de 30 dias</span>
                         <br>
-                        <span class="info-box-number text-center">{{ contracts() }}</span>
+                        <span class="info-box-number text-center"></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>

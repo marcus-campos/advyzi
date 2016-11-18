@@ -5,10 +5,10 @@ namespace SgcAdmin\Repositories;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface ContractsRepository
+ * Interface ContractRepository
  * @package namespace SgcAdmin\Repositories;
  */
-interface ContractsRepository extends RepositoryInterface
+interface ContractRepository extends RepositoryInterface
 {
     //
 }
