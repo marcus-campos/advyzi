@@ -66,8 +66,8 @@ class CustomerContractsController extends Controller
     public function store(CustomerContractsRequest $request)
     {
         $contract = $request->all();
-        $contract['start_date'] = Carbon::createFromFormat('d/m/Y', $contract['start_date']);
-        $contract['end_date'] = Carbon::createFromFormat('d/m/Y', $contract['end_date']);
+       /* $contract['start_date'] = Carbon::createFromFormat('d/m/Y', $contract['start_date']);
+        $contract['end_date'] = Carbon::createFromFormat('d/m/Y', $contract['end_date']);*/
         $contract['user_id'] = Auth::user()->id;
 
 
