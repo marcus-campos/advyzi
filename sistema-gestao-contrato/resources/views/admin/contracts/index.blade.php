@@ -6,7 +6,7 @@
 @extends('vendor.admin.page.title-page')
 
 @section('content')
-    <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-contract">{{ isset($contractEdit) ? 'Editar cliente' : 'Novo cliente' }}</a></p>
+    <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-contract">{{ isset($contractEdit) ? 'Editar contrato' : 'Novo contrato' }}</a></p>
     <div class="box">
         <div class="box-body">
             <div class="box-body">
@@ -14,8 +14,8 @@
                     <table id="dt-grid" class="table table-striped toggle-circle m-b-0" data-page-size="10">
                         <thead>
                         <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
+                            <th>Cliente</th>
+                            <th>Final do contrato</th>
                             <th>Ação</th>
                         </tr>
                         </thead>
@@ -33,15 +33,16 @@
                         <tbody>
                         @foreach($contracts as $contract)
                             <tr>
-                                <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->name }}</td>
-                                <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->email }}</td>
+                                <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract['contract']['id']]) }}';">{{ $contract['customer']['name'] }}</td>
+
+                                <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract['contract']['id']]) }}';">{{ getDaysBetweenDates(formatDate($contract['contract']['end_date'], 'mdy')) }} dias</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
                                         <ul class="dropdown-menu drop-menu-right" role="menu">
-                                            <li><a href="{{ route('admin.contract.edit', ['id' => $contract->id]) }}" class="text-center">Editar</a></li>
+                                            <li><a href="{{ route('admin.customer.contract.edit', ['id' => $contract['contract']['id']]) }}" class="text-center">Editar</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="{{ route('admin.contract.delete', ['id' => $contract->id]) }}" class="text-center"><span class="text text-danger">Deletar</span></a></li>
+                                            <li><a href="{{ route('admin.customer.contract.delete', ['id' => $contract['contract']['id']]) }}" class="text-center"><span class="text text-danger">Deletar</span></a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -72,11 +73,11 @@
                     <a href="{{ route('admin.contract.index') }}" type="button" class="close" aria-hidden="true">×</a>
                     <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
                     @if(isset($contractEdit))
-                        {!! Form::model($contractEdit,['route' => ['admin.contract.update', $contractEdit->id], 'method'=>'put']) !!}
-                        <h4 class="modal-title">Editar cliente</h4>
+                        {!! Form::model($contractEdit,['route' => ['admin.customer.contract.update', $contractEdit->id], 'method'=>'put']) !!}
+                        <h4 class="modal-title">Editar contrato</h4>
                     @else
-                        {!! Form::open(['route'=>'admin.contract.store', 'method'=>'post']) !!}
-                        <h4 class="modal-title">Novo cliente</h4>
+                        {!! Form::open(['route'=>'admin.customer.contract.store', 'method'=>'post']) !!}
+                        <h4 class="modal-title">Novo contrato</h4>
                     @endif
                 </div>
                 <div class="modal-body">
@@ -84,42 +85,54 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="pull-left">Nome:</label>
-                                        {!! Form::text('name', null,['class' => 'form-control', 'placeholder' => 'Ex: Rúben Lascasas']) !!}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="pull-left">Email:</label>
-                                        {!! Form::email('email', null,['class' => 'form-control', 'placeholder' => 'Ex: geral@rubenlascasas.com']) !!}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="pull-left">Endereço:</label>
-                                        {!! Form::text('address', null,['class' => 'form-control', 'placeholder' => 'Ex: Rua ABC']) !!}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="pull-left">Região:</label>
-                                        {!! Form::text('region', null,['class' => 'form-control', 'placeholder' => 'Ex: Gondomar, Rio Tinto...']) !!}
+                                    <div class="form-group contracts col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="pull-left">O que contratou?</label>
+                                                {!! Form::text('which_hired', null,['class' => 'form-control', 'placeholder' => 'Ex: Internet, tv...']) !!}
 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="pull-left">Cidade:</label>
-                                        {!! Form::text('city', null,['class' => 'form-control', 'placeholder' => 'Ex: Porto']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Operadora:</label>
 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="pull-left">NIF:</label>
-                                        {!! Form::text('nif', null,['class' => 'form-control', 'placeholder' => 'Ex: 999999999']) !!}
+                                        {{ Form::select('operator_id', $operators, null, ['id'=>'category_id', 'class' => 'form-control']) }}
+                                        <!-- /.input group -->
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Início contrato:</label>
 
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                {!! Form::text('start_date', null,['id' => 'start_datemask', 'class' => 'form-control']) !!}
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Fim contrato:</label>
+
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                {!! Form::text('end_date', null,['id' => 'end_datemask', 'class' => 'form-control']) !!}
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Cliente:</label>
+
+                                        {{ Form::select('customer_contracts_id', $customer, null, ['id'=>'customer_contracts_id', 'class' => 'form-control']) }}
+                                        <!-- /.input group -->
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="pull-left">Observações</label>
+                                                {!! Form::textarea('description', null,['class' => 'form-control', 'placeholder' => 'Ex: Pacote de internet com velocidade de ...']) !!}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -170,6 +183,12 @@
     <!-- bootstrap datepicker -->
     <script src="{{ asset('../../plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 
+
+    //Page script
+
+
+
+    //Date picker
     <script>
         $("#start_datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
         $("#end_datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});

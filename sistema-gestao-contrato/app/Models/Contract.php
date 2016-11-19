@@ -15,7 +15,11 @@ class Contract extends Model implements Transformable
         'description',
         'start_date',
         'end_date',
-        'customer_contract_id'
+        'customer_contracts_id'
     ];
 
+    public function customer()
+    {
+        return $this->belongsTo(CustomerContracts::class);
+    }
 }

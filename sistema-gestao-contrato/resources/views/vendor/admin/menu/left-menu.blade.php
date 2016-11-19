@@ -17,6 +17,11 @@
                     </a>
                 </li>
                 <li class="treeview">
+                    <a href="{{ route('admin.customer.contract.index') }}">
+                        <i class="fa fa-file-text-o"></i> <span>Contratos</span>
+                    </a>
+                </li>
+                <li class="treeview">
                     <a href="{{ route('admin.operator.index') }}">
                         <i class="fa fa-building-o"></i> <span>Operadoras</span>
                     </a>

@@ -72,6 +72,6 @@ function getDaysBetweenDates($date)
 
 function contracts()
 {
-    $contract = App::make('SgcAdmin\Http\Controllers\CustomerContractsController');
+    $contract = App::make('SgcAdmin\Http\Controllers\ContractsController');
     return $contract->contracts();
 }
