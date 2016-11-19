@@ -60,8 +60,6 @@ class ContractsController extends Controller
         $contracts = [
             "customer" =>$contracts,
             "contracts" => $contracts[0]['contracts']
-                ->where('end_date', '>=', Carbon::now()->toDateString())
-                ->where('end_date', '<=', Carbon::now()->addDays(30)->toDateString())
         ];
 
         foreach ($contracts['contracts'] as $contract)
@@ -112,8 +110,6 @@ class ContractsController extends Controller
         $contracts = [
             "customer" =>$contracts,
             "contracts" => $contracts[0]['contracts']
-                ->where('end_date', '>=', Carbon::now()->toDateString())
-                ->where('end_date', '<=', Carbon::now()->addDays(30)->toDateString())
         ];
 
         foreach ($contracts['contracts'] as $contract)
