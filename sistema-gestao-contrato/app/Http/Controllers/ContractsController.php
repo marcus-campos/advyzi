@@ -40,7 +40,7 @@ class ContractsController extends Controller
     {
         $this->breadcrumbs = [
             'title' => 'Contratos',
-            'page' => 'Registros',
+            'page' => 'Registos',
             'fa' => 'fa-file-text-o'
         ];
 

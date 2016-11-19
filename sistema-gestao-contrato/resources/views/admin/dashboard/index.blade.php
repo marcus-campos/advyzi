@@ -33,8 +33,7 @@
                             <table id="dt-grid" class="table table-striped toggle-circle m-b-0" data-page-size="10">
                                 <thead>
                                 <tr>
-                                    <th>Nome</th>
-                                    <th>Operadora</th>
+                                    <th>Cliente</th>
                                     <th>Final do contrato</th>
                                     <th>Ação</th>
                                 </tr>
@@ -53,14 +52,16 @@
                                 <tbody>
                                 @foreach($contracts as $contract)
                                     <tr>
-                                        <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->name }}</td>
-                                        <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->operator->name }}</td>
-                                        <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ getDaysBetweenDates(formatDate($contract->end_date, 'mdy')) }} dias</td>
+                                        <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract['contract']['id']]) }}';">{{ $contract['customer']['name'] }}</td>
+
+                                        <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract['contract']['id']]) }}';">{{ getDaysBetweenDates(formatDate($contract['contract']['end_date'], 'mdy')) }} dias</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
                                                 <ul class="dropdown-menu drop-menu-right" role="menu">
-                                                    <li><a href="{{ route('admin.contract.edit', ['id' => $contract->id]) }}" class="text-center">Detalhes</a></li>
+                                                    <li><a href="{{ route('admin.customer.contract.edit', ['id' => $contract['contract']['id']]) }}" class="text-center">Editar</a></li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="{{ route('admin.customer.contract.delete', ['id' => $contract['contract']['id']]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
                                                 </ul>
                                             </div>
                                         </td>

@@ -32,7 +32,7 @@
                                         <ul class="dropdown-menu drop-menu-right" role="menu">
                                             <li><a href="{{ route('admin.user.edit', ['id' => $user->id]) }}" class="text-center">Editar</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="{{ route('admin.user.delete', ['id' => $user->id]) }}" class="text-center"><span class="text text-danger">Deletar</span></a></li>
+                                            <li><a href="{{ route('admin.user.delete', ['id' => $user->id]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -105,7 +105,7 @@
                     @else
                         <a type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fechar</a>
                     @endif
-                    <button type="submit" class="btn btn-info waves-effect waves-light">Salvar</button>
+                    <button type="submit" class="btn btn-info waves-effect waves-light">Guardar</button>
                 </div>
                 {!! Form::close() !!}
             </div><!-- /.modal-content -->
