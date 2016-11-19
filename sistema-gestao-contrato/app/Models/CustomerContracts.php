@@ -18,7 +18,6 @@ class CustomerContracts extends Model implements Transformable
         'region',
         'city',
         'nif',
-        'operator_id',
         'user_id'
     ];
 

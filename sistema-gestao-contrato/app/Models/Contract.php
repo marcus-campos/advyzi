@@ -15,6 +15,7 @@ class Contract extends Model implements Transformable
         'description',
         'start_date',
         'end_date',
+        'operator_id',
         'customer_contracts_id'
     ];
 

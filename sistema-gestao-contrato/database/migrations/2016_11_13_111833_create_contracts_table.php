@@ -19,11 +19,13 @@ class CreateContractsTable extends Migration
             $table->string('description');
             $table->date('start_date');
             $table->date('end_date');
+            $table->unsignedInteger('operator_id');
             $table->integer('customer_contracts_id')->unsigned();
             $table->timestamps();
 		});
 
         Schema::table('contracts', function (Blueprint $table){
+            $table->foreign('operator_id')->references('id')->on('operators')->onDelete('cascade');
             $table->foreign('customer_contract_id')->references('id')->on('customer_contracts')->onDelete('cascade');
         });
 	}
@@ -36,6 +38,7 @@ class CreateContractsTable extends Migration
 	public function down()
 	{
         Schema::table('contracts', function (Blueprint $table){
+            $table->dropForeign('operator_id');
             $table->dropForeign('customer_contracts_id');
         });
 
