@@ -64,7 +64,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Nome:</label>
-                                        {!! Form::text('name', null,['class' => 'form-control', 'placeholder' => 'Ex: MEO']) !!}
+                                        {!! Form::text('name', null,['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                             </div>

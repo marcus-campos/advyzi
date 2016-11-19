@@ -68,13 +68,13 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Nome:</label>
-                                        {!! Form::text('name', null,['class' => 'form-control', 'placeholder' => 'Ex: Rúben Lascasas']) !!}
+                                        {!! Form::text('name', null,['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Email:</label>
-                                        {!! Form::email('email', null,['class' => 'form-control', 'placeholder' => 'Ex: geral@rubenlascasas.com']) !!}
+                                        {!! Form::email('email', null,['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                                 <div class="row">

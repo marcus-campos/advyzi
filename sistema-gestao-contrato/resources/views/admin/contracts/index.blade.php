@@ -89,7 +89,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="pull-left">O que contratou?</label>
-                                                {!! Form::text('which_hired', null,['class' => 'form-control', 'placeholder' => 'Ex: Internet, tv...']) !!}
+                                                {!! Form::text('which_hired', null,['class' => 'form-control']) !!}
 
                                             </div>
                                         </div>
@@ -130,7 +130,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="pull-left">Observações</label>
-                                                {!! Form::textarea('description', null,['class' => 'form-control', 'placeholder' => 'Ex: Pacote de internet com velocidade de ...']) !!}
+                                                {!! Form::textarea('description', null,['class' => 'form-control']) !!}
                                             </div>
                                         </div>
                                     </div>

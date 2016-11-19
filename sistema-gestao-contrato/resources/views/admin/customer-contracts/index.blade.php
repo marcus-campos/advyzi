@@ -86,39 +86,39 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Nome:</label>
-                                        {!! Form::text('name', null,['class' => 'form-control', 'placeholder' => 'Ex: Rúben Lascasas']) !!}
+                                        {!! Form::text('name', null,['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Email:</label>
-                                        {!! Form::email('email', null,['class' => 'form-control', 'placeholder' => 'Ex: geral@rubenlascasas.com']) !!}
+                                        {!! Form::email('email', null,['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Endereço:</label>
-                                        {!! Form::text('address', null,['class' => 'form-control', 'placeholder' => 'Ex: Rua ABC']) !!}
+                                        {!! Form::text('address', null,['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Região:</label>
-                                        {!! Form::text('region', null,['class' => 'form-control', 'placeholder' => 'Ex: Gondomar, Rio Tinto...']) !!}
+                                        {!! Form::text('region', null,['class' => 'form-control']) !!}
 
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">Cidade:</label>
-                                        {!! Form::text('city', null,['class' => 'form-control', 'placeholder' => 'Ex: Porto']) !!}
+                                        {!! Form::text('city', null,['class' => 'form-control']) !!}
 
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="pull-left">NIF:</label>
-                                        {!! Form::text('nif', null,['class' => 'form-control', 'placeholder' => 'Ex: 999999999']) !!}
+                                        {!! Form::text('nif', null,['class' => 'form-control']) !!}
 
                                     </div>
                                 </div>
