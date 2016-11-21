@@ -185,12 +185,6 @@
     <!-- bootstrap datepicker -->
     <script src="{{ asset('../../plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 
-
-    //Page script
-
-
-
-    //Date picker
     <script>
         $("#start_datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
         $("#end_datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
