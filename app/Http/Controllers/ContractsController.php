@@ -91,6 +91,7 @@ class ContractsController extends Controller
             $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
 
         $clientToAdd = $id;
+        $clientModal = false;
 
         $this->breadcrumbs = [
             'title' => 'Contratos - '.$contracts[0]['customer']['name'],
@@ -106,6 +107,7 @@ class ContractsController extends Controller
                 'operators',
                 'customer',
                 'clientToAdd',
+                'clientModal',
                 'callBack'
             )
         );
@@ -125,6 +127,7 @@ class ContractsController extends Controller
 
 
         $clientToAdd = $id;
+        $clientModal = true;
 
         return view(
             'admin.contracts.index',
@@ -134,6 +137,7 @@ class ContractsController extends Controller
                 'operators',
                 'customer',
                 'clientToAdd',
+                'clientModal',
                 'callBack'
             )
         );

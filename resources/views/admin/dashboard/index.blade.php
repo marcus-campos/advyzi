@@ -57,7 +57,7 @@
                                                 <td onClick="window.location.href='{{ route('admin.customer.contract.edit.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}';">{{ $contract['customer']['name'] }}</td>
 
                                                 <td onClick="window.location.href='{{ route('admin.customer.contract.edit.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}';">
-                                                    {{ (getDaysBetweenDates(formatDate($contract['end_date'], 'mdy'))) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Venceu dia '.formatDate($contract['end_date'], 'mdy').'.'}}
+                                                    {{ (getDaysBetweenDates(formatDate($contract['end_date'], 'mdy'))) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Terminou dia '.formatDate($contract['end_date'], 'mdy').'.'}}
                                                 </td>
                                                 <td>
                                                     <div class="btn-group">
@@ -76,7 +76,7 @@
                                                     <td onClick="window.location.href='{{ route('admin.customer.contract.edit.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}';">{{ $contract['customer']['name'] }}</td>
 
                                                     <td onClick="window.location.href='{{ route('admin.customer.contract.edit.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}';">
-                                                        {{ getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Venceu dia '.formatDate($contract['end_date'], 'mdy').'.'}}
+                                                        {{ getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Terminou dia '.formatDate($contract['end_date'], 'mdy').'.'}}
                                                     </td>
                                                     <td>
                                                         <div class="btn-group">

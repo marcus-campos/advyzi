@@ -41,7 +41,7 @@
                                             {{ $contract['which_hired'] }}
                                         </td>
                                         <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">
-                                            {{ (getDaysBetweenDates(formatDate($contract['end_date'], 'mdy'))) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Venceu dia '.formatDate($contract['end_date'], 'mdy').'.'}}
+                                            {{ (getDaysBetweenDates(formatDate($contract['end_date'], 'mdy'))) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Terminou dia '.formatDate($contract['end_date'], 'mdy').'.'}}
                                         </td>
                                         <td>
                                             <div class="btn-group">
@@ -62,7 +62,7 @@
                                                 {{ $contract['which_hired'] }}
                                             </td>
                                             <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">
-                                                {{ getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Venceu dia '.formatDate($contract['end_date'], 'mdy').'.'}}
+                                                {{ getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Terminou dia '.formatDate($contract['end_date'], 'mdy').'.'}}
                                             </td>
                                             <td>
                                                 <div class="btn-group">
@@ -258,7 +258,7 @@
         </script>
     @endif
 
-    @if(isset($clientToAdd))
+    @if(isset($clientModal) && $clientModal == true)
         <script>
             $('#modal-contract').modal('show');
         </script>

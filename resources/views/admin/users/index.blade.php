@@ -87,13 +87,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label class="pull-left">Comissão:</label>
-                                        {!! Form::text('commission', null,['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label class="pull-left">Tipo de usuário:</label>
+                                        <label class="pull-left">Tipo de utilizador:</label>
                                         {!! Form::select('role', roles(), null,['class' => 'form-control']) !!}
                                     </div>
                                 </div>
@@ -128,7 +122,7 @@
                             <div class="col-xs-12 col-sm-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label class="pull-left">Transferir para:</label>
+                                        <label class="pull-left">Transferir clientes para:</label>
                                         {!! Form::select('userToTransfer', $users->pluck('name','id'), null,['class' => 'form-control']) !!}
                                     </div>
                                 </div>
