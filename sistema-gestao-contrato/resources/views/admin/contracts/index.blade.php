@@ -10,7 +10,7 @@
     <div class="box">
         <div class="box-body">
             <div class="box-body">
-                <div class="table-responsive">
+                <div>
                     <table id="dt-grid" class="table table-striped toggle-circle m-b-0" data-page-size="10">
                         <thead>
                         <tr>
@@ -33,21 +33,45 @@
                         <tbody>
                         @if(isset($contracts))
                             @foreach($contracts as $contract)
-                                <tr>
-                                    <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract['contract']['id']]) }}';">{{ $contract['customer']['name'] }}</td>
+                                @if(Auth::user()->role == 'admin')
+                                    <tr>
+                                        <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">{{ $contract['customer']['name'] }}</td>
 
-                                    <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract['contract']['id']]) }}';">{{ getDaysBetweenDates(formatDate($contract['contract']['end_date'], 'mdy')) }} dias</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
-                                            <ul class="dropdown-menu drop-menu-right" role="menu">
-                                                <li><a href="{{ route('admin.customer.contract.edit', ['id' => $contract['contract']['id']]) }}" class="text-center">Editar</a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="{{ route('admin.customer.contract.delete', ['id' => $contract['contract']['id']]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">
+                                            {{ (getDaysBetweenDates(formatDate($contract['end_date'], 'mdy'))) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Venceu dia '.formatDate($contract['end_date'], 'mdy').'.'}}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
+                                                <ul class="dropdown-menu drop-menu-right" role="menu">
+                                                    <li><a href="{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}" class="text-center">Editar</a></li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="{{ route('admin.customer.contract.delete', ['id' => $contract['id']]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @else
+                                    @if($contract['customer']['user_id'] == Auth::user()->id)
+                                        <tr>
+                                            <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">{{ $contract['customer']['name'] }}</td>
+
+                                            <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">
+                                                {{ getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Venceu dia '.formatDate($contract['end_date'], 'mdy').'.'}}
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
+                                                    <ul class="dropdown-menu drop-menu-right" role="menu">
+                                                        <li><a href="{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}" class="text-center">Editar</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="{{ route('admin.customer.contract.delete', ['id' => $contract['id']]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endif
                             @endforeach
                         @endif
                         </tbody>
@@ -72,7 +96,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <a href="{{ route('admin.contract.index') }}" type="button" class="close" aria-hidden="true">×</a>
+                    @if(isset($callBack) && $callBack != '')
+                        <a href="{{ route($callBack) }}" type="button" class="close" aria-hidden="true">×</a>
+                    @else
+                        <a href="{{ route('admin.customer.contract.index') }}" type="button" class="close" aria-hidden="true">×</a>
+                    @endif
                     <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
                     @if(isset($contractEdit))
                         {!! Form::model($contractEdit,['route' => ['admin.customer.contract.update', $contractEdit->id], 'method'=>'put']) !!}
@@ -143,7 +171,11 @@
                 </div>
                 <div class="modal-footer">
                     @if(isset($contractEdit))
-                        <a href="{{ route('admin.user.index') }}" type="button" class="btn btn-default waves-effect">Fechar</a>
+                        @if(isset($callBack) && $callBack != '')
+                            <a href="{{ route($callBack) }}" type="button" class="btn btn-default waves-effect">Fechar</a>
+                        @else
+                            <a href="{{ route('admin.customer.contract.index') }}" type="button" class="btn btn-default waves-effect">Fechar</a>
+                        @endif
                     @else
                         <a type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fechar</a>
                     @endif
@@ -186,8 +218,24 @@
     <script src="{{ asset('../../plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 
     <script>
-        $("#start_datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-        $("#end_datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        $(function() {
+            $('input[name="start_date"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                locale: {
+                    format: 'DD/MM/YYYY'
+                }
+            });
+
+            $('input[name="end_date"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                locale: {
+                    format: 'DD/MM/YYYY'
+                }
+            });
+        });
+
     </script>
 
 

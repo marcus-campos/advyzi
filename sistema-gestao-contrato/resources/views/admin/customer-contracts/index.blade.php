@@ -7,15 +7,21 @@
 
 @section('content')
     <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-contract">{{ isset($contractEdit) ? 'Editar cliente' : 'Novo cliente' }}</a></p>
+
+    @include('vendor.errors.messages')
+
     <div class="box">
         <div class="box-body">
             <div class="box-body">
-                <div class="table-responsive">
+                <div>
                     <table id="dt-grid" class="table table-striped toggle-circle m-b-0" data-page-size="10">
                         <thead>
                         <tr>
                             <th>Nome</th>
                             <th>Email</th>
+                            @if(Auth::user()->role == 'admin')
+                            <th>Vendedor</th>
+                            @endif
                             <th>Ação</th>
                         </tr>
                         </thead>
@@ -34,18 +40,34 @@
                         @if(isset($contracts) && $contracts != null)
                             @foreach($contracts as $contract)
                                 <tr>
-                                    <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->name }}</td>
-                                    <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->email }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
-                                            <ul class="dropdown-menu drop-menu-right" role="menu">
-                                                <li><a href="{{ route('admin.contract.edit', ['id' => $contract->id]) }}" class="text-center">Editar</a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="{{ route('admin.contract.delete', ['id' => $contract->id]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
+                                    @if(Auth::user()->role == 'admin')
+                                        <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->name }}</td>
+                                        <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->email }}</td>
+                                        <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->user->name }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
+                                                <ul class="dropdown-menu drop-menu-right" role="menu">
+                                                    <li><a href="{{ route('admin.contract.edit', ['id' => $contract->id]) }}" class="text-center">Editar</a></li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="{{ route('admin.contract.delete', ['id' => $contract->id]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    @else
+                                        <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->name }}</td>
+                                        <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract->id]) }}';">{{ $contract->email }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
+                                                <ul class="dropdown-menu drop-menu-right" role="menu">
+                                                    <li><a href="{{ route('admin.contract.edit', ['id' => $contract->id]) }}" class="text-center">Editar</a></li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="{{ route('admin.contract.delete', ['id' => $contract->id]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         @endif
@@ -99,20 +121,26 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label class="pull-left">Endereço:</label>
+                                        <label class="pull-left">Telefone:</label>
+                                        {!! Form::text('phone', null,['class' => 'form-control']) !!}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="pull-left">Morada:</label>
                                         {!! Form::text('address', null,['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label class="pull-left">Região:</label>
-                                        {!! Form::text('region', null,['class' => 'form-control']) !!}
+                                        <label class="pull-left">Código postal:</label>
+                                        {!! Form::text('zipcode', null,['class' => 'form-control']) !!}
 
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label class="pull-left">Cidade:</label>
+                                        <label class="pull-left">Localidade:</label>
                                         {!! Form::text('city', null,['class' => 'form-control']) !!}
 
                                     </div>
@@ -124,13 +152,33 @@
 
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Tipo cliente:</label>
+
+                                {{ Form::select('client_type', $clientType, null, ['id'=>'client_type', 'class' => 'form-control']) }}
+                                <!-- /.input group -->
+                                </div>
+                                <div class="form-group">
+                                    <label>Estado:</label>
+
+                                {{ Form::select('client_status', $clientStatus, null, ['id'=>'client_status', 'class' => 'form-control']) }}
+                                <!-- /.input group -->
+                                </div>
+                                @if(Auth::user()->role == 'admin')
+                                <div class="form-group">
+                                    <label>Vendedor:</label>
+
+                                {{ Form::select('user_id', $salesman, Auth::user()->id, ['id'=>'user_id', 'class' => 'form-control']) }}
+                                <!-- /.input group -->
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     @if(isset($contractEdit))
-                        <a href="{{ route('admin.user.index') }}" type="button" class="btn btn-default waves-effect">Fechar</a>
+                        <a href="{{ route('admin.contract.index') }}" type="button" class="btn btn-default waves-effect">Fechar</a>
                     @else
                         <a type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fechar</a>
                     @endif

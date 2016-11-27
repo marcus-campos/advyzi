@@ -14,16 +14,18 @@ class CustomerContracts extends Model implements Transformable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'address',
-        'region',
+        'zipcode',
         'city',
         'nif',
-        'user_id'
+        'user_id',
+        'client_type'
     ];
 
-    public function operator()
+    public function user()
     {
-        return $this->belongsTo(Operator::class);
+        return $this->belongsTo(User::class);
     }
 
     public function contracts()

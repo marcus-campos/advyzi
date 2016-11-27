@@ -21,7 +21,7 @@
                         <i class="fa fa-file-text-o"></i> <span>Contratos</span>
                     </a>
                 </li>
-                @if(Auth::user()->role == 'boss' || Auth::user()->role == 'admin')
+                @if(Auth::user()->role == 'admin')
                 <li class="treeview">
                     <a href="{{ route('admin.operator.index') }}">
                         <i class="fa fa-building-o"></i> <span>Operadoras</span>

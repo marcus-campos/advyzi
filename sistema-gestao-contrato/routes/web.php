@@ -68,7 +68,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'ContractsController@index']);
             Route::post('store', ['as' => 'store', 'uses' => 'ContractsController@store']);
             Route::get('destroy/{id}', ['as' => 'delete', 'uses' => 'ContractsController@destroy']);
+            Route::get('destroy/{id}/{callBack}', ['as' => 'delete.callback', 'uses' => 'ContractsController@destroy']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ContractsController@edit']);
+            Route::get('edit/{id}/{callBack}', ['as' => 'edit.callback', 'uses' => 'ContractsController@edit']);
             Route::put('update/{id}', ['as' => 'update', 'uses' => 'ContractsController@update']);
         });
 

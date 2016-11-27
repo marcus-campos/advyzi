@@ -24,7 +24,8 @@ class CustomerContractsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nif' => 'unique:customer_contracts',
+            'email' => 'email|unique:users'
         ];
     }
 }

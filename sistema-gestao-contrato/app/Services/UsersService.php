@@ -29,6 +29,6 @@ class UsersService
     {
         $request['password'] = bcrypt($request['password']);
 
-        return $this->userRepository->update($request->all(), $id);
+        return $this->userRepository->update($request, $id);
     }
 }

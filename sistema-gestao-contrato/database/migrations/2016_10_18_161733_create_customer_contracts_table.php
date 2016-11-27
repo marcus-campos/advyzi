@@ -17,10 +17,13 @@ class CreateCustomerContractsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email');
+            $table->string('phone');
             $table->string('address');
-            $table->string('region');
+            $table->string('zipcode');
             $table->string('city');
-            $table->string('nif');
+            $table->string('nif')->unique();
+            $table->enum('client_type', ['company', 'private']);
+            $table->enum('client_status', ['effective', 'external']);
             $table->unsignedInteger('user_id');
             $table->timestamps();
         });

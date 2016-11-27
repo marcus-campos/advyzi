@@ -29,7 +29,7 @@
                 <div class="box-body">
                     <div class="box-body">
                         <h3>Contratos com menos de 30 dias</h3>
-                        <div class="table-responsive">
+                        <div>
                             <table id="dt-grid" class="table table-striped toggle-circle m-b-0" data-page-size="10">
                                 <thead>
                                 <tr>
@@ -50,23 +50,47 @@
                                 </div>
 
                                 <tbody>
-                                @if(isset($contracts) && $contracts != null)
+                                @if(isset($contracts))
                                     @foreach($contracts as $contract)
-                                        <tr>
-                                            <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract['contract']['id']]) }}';">{{ $contract['customer']['name'] }}</td>
+                                        @if(Auth::user()->role == 'admin')
+                                            <tr>
+                                                <td onClick="window.location.href='{{ route('admin.customer.contract.edit.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}';">{{ $contract['customer']['name'] }}</td>
 
-                                            <td onClick="window.location.href='{{ route('admin.contract.edit', ['id' => $contract['contract']['id']]) }}';">{{ getDaysBetweenDates(formatDate($contract['contract']['end_date'], 'mdy')) }} dias</td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
-                                                    <ul class="dropdown-menu drop-menu-right" role="menu">
-                                                        <li><a href="{{ route('admin.customer.contract.edit', ['id' => $contract['contract']['id']]) }}" class="text-center">Editar</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a href="{{ route('admin.customer.contract.delete', ['id' => $contract['contract']['id']]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                <td onClick="window.location.href='{{ route('admin.customer.contract.edit.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}';">
+                                                    {{ (getDaysBetweenDates(formatDate($contract['end_date'], 'mdy'))) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Venceu dia '.formatDate($contract['end_date'], 'mdy').'.'}}
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
+                                                        <ul class="dropdown-menu drop-menu-right" role="menu">
+                                                            <li><a href="{{ route('admin.customer.contract.edit.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}" class="text-center">Editar</a></li>
+                                                            <li class="divider"></li>
+                                                            <li><a href="{{ route('admin.customer.contract.delete.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @else
+                                            @if($contract['customer']['user_id'] == Auth::user()->id)
+                                                <tr>
+                                                    <td onClick="window.location.href='{{ route('admin.customer.contract.edit.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}';">{{ $contract['customer']['name'] }}</td>
+
+                                                    <td onClick="window.location.href='{{ route('admin.customer.contract.edit.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}';">
+                                                        {{ getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Venceu dia '.formatDate($contract['end_date'], 'mdy').'.'}}
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
+                                                            <ul class="dropdown-menu drop-menu-right" role="menu">
+                                                                <li><a href="{{ route('admin.customer.contract.edit.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}" class="text-center">Editar</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="{{ route('admin.customer.contract.delete.callback', ['id' => $contract['id'], 'callBack' => 'admin.dashboard.index']) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endif
                                     @endforeach
                                 @endif
                                 </tbody>

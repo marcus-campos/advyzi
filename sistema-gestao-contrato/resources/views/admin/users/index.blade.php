@@ -6,11 +6,12 @@
 @extends('vendor.admin.page.title-page')
 
 @section('content')
-    <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-user">Novo Usuário</a></p>
+    <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-user">Novo utilizador</a></p>
+    @include('vendor.errors.messages')
     <div class="box">
         <div class="box-body">
             <div class="box-body">
-                <div class="table-responsive">
+                <div>
                     <table id="data" class="table table-bordered table-hover">
                         <thead>
                         <tr>
@@ -55,10 +56,10 @@
                     <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
                     @if(isset($userEdit))
                         {!! Form::model($userEdit,['route' => ['admin.user.update', $userEdit->id], 'method'=>'put']) !!}
-                        <h4 class="modal-title">Editar usuário</h4>
+                        <h4 class="modal-title">Editar utilizador</h4>
                     @else
                         {!! Form::open(['route'=>'admin.user.store', 'method'=>'post']) !!}
-                        <h4 class="modal-title">Novo usuário</h4>
+                        <h4 class="modal-title">Novo u</h4>
                     @endif
                 </div>
                 <div class="modal-body">

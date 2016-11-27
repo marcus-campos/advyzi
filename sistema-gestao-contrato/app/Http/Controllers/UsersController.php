@@ -33,7 +33,10 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = $this->userRepository->findWhere([['role', '<>', 'admin']]);
+        if(Auth::user()->role == 'admin')
+            $users = $this->userRepository->all();
+        else
+            $users = $this->userRepository->findWhere([['role', '<>', 'admin']]);
 
         return view(
             'admin.users.index',
@@ -72,7 +75,7 @@ class UsersController extends Controller
         );
     }
 
-    public function update(UsersRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $this->usersService->update($request->all(), $id);
 

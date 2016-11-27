@@ -51,45 +51,21 @@ class ContractsController extends Controller
 
     public function index()
     {
-        $newContracts = [];
         $operators = $this->operatorRepository->all()->pluck('name','id');
-        $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
 
-        $contracts = $this->customerContractsRepository->with('contracts')->findWhere([
-            ['user_id', '=', Auth::user()->id]
-        ]);
-
-        if($contracts->count() > 0) {
-            $contracts = [
-                "customer" => $contracts,
-                "contracts" => $contracts[0]['contracts']
-            ];
-
-            foreach ($contracts['contracts'] as $contract) {
-                foreach ($contracts['customer'] as $customer) {
-                    if ($customer['id'] == $contract['customer_contracts_id']) {
-                        $newContracts[] = [
-                            'customer' => $customer,
-                            'contract' => $contract
-                        ];
-                    }
-                }
-
-            }
+        if(Auth::user()->role == 'admin') {
+            $contracts = $this->contractRepository->with('customer')
+                ->all();
         }
+        else {
+            $contracts = $this->contractRepository->with('customer')->all();
+        }
+
+        if(Auth::user()->role == 'admin')
+            $customer = $this->customerContractsRepository->all()->pluck('name', 'id');
         else
-        {
-            return view(
-                'admin.contracts.index',
-                $this->breadcrumbs,
-                compact(
-                    'operators',
-                    'customer'
-                )
-            );
-        }
+            $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
 
-        $contracts = $newContracts;
 
         return view(
             'admin.contracts.index',
@@ -110,32 +86,21 @@ class ContractsController extends Controller
         return redirect()->route('admin.customer.contract.index');
     }
 
-    public function edit($id)
+    public function edit($id, $callBack = '')
     {
-        $newContracts = null;
-
-        $contracts = $this->customerContractsRepository->with('contracts')->findWhere([
-            ['user_id', '=', Auth::user()->id]
-        ]);
-
-        $contracts = [
-            "customer" =>$contracts,
-            "contracts" => $contracts[0]['contracts']
-        ];
-
-        foreach ($contracts['contracts'] as $contract)
-        {
-            foreach ($contracts['customer'] as $customer)
-            {
-                if($customer['id'] == $contract['customer_contracts_id'])
-                    $newContracts[] = [
-                        'customer' => $customer,
-                        'contract' => $contract
-                    ];
-            }
+        if(Auth::user()->role == 'admin') {
+            $contracts = $this->contractRepository->with('customer')
+                ->all();
+        }
+        else {
+            $contracts = $this->contractRepository->with('customer')->all();
         }
 
-        $contracts = $newContracts;
+        if(Auth::user()->role == 'admin')
+            $customer = $this->customerContractsRepository->all()->pluck('name', 'id');
+        else
+            $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
+
 
         $contractEdit = $this->contractRepository->find($id);
         $contractEdit->start_date = Carbon::parse($contractEdit->start_date)->format('d-m-Y');
@@ -151,7 +116,8 @@ class ContractsController extends Controller
                 'contracts',
                 'contractEdit',
                 'operators',
-                'customer'
+                'customer',
+                'callBack'
             )
         );
     }
@@ -166,20 +132,37 @@ class ContractsController extends Controller
         return redirect()->route('admin.customer.contract.index');
     }
 
+    public function destroy($id, $callBack = 'admin.customer.contract.index')
+    {
+        $this->contractRepository->find($id)->delete();
+
+        return redirect()->route($callBack);
+    }
+
     public function contracts()
     {
-        $contracts = $this->customerContractsRepository->with('contracts')->findWhere([
-            ['user_id', '=', Auth::user()->id]
+        $countContracts = 0;
+        $contracts = $this->contractRepository->with('customer')->findWhere([
+            ['end_date', '>', Carbon::now()->toDateString()],
+            ['end_date', '<=', Carbon::now()->addDays(30)->toDateString()]
         ]);
 
         if($contracts->count() > 0) {
-            $contracts = $contracts[0]['contracts'];
 
-            $contracts = $contracts->where('end_date', '>=', Carbon::now()->toDateString())
-                ->where('end_date', '<=', Carbon::now()->addDays(30)->toDateString())
-                ->count();
+            foreach ($contracts as $contract)
+            {
+                if(Auth::user()->role == 'admin') {
+                    $countContracts++;
+                }
+                else
+                {
+                    if ($contract['customer']['id'] == Auth::user()->id) {
+                        $countContracts++;
+                    }
+                }
+            }
 
-            return $contracts;
+            return $countContracts;
         }
         else
         {

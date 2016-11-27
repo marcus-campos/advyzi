@@ -10,7 +10,7 @@
     <div class="box">
         <div class="box-body">
             <div class="box-body">
-                <div class="table-responsive">
+                <div>
                     <table id="data" class="table table-bordered table-hover">
                         <thead>
                         <tr>

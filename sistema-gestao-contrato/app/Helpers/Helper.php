@@ -10,17 +10,25 @@ function roles()
     if (Auth::user()->role == 'admin'){
         return [
             'salesman' => 'Vendedor',
-            'boss' => 'Chefe',
             'admin' => 'Administrador'
         ];
     }
-    else
-    {
-        return [
-            'salesman' => 'Vendedor',
-            'boss' => 'Chefe'
-        ];
-    }
+}
+
+function clientType()
+{
+    return [
+        'company' => 'Empresa',
+        'private' => 'Particular'
+    ];
+}
+
+function clientStatus()
+{
+    return [
+        'effective' => 'Cliente Efetivo',
+        'external' => 'Cliente Externo'
+    ];
 }
 
 /**
