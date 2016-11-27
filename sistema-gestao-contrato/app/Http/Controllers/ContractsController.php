@@ -77,6 +77,68 @@ class ContractsController extends Controller
             )
         );
     }
+
+    public function clientContracts($id, $callBack = '')
+    {
+        $operators = $this->operatorRepository->all()->pluck('name','id');
+
+        $contracts = $this->contractRepository->with('customer')
+            ->findWhere([['customer_contracts_id', '=', $id]]);
+
+        if(Auth::user()->role == 'admin')
+            $customer = $this->customerContractsRepository->all()->pluck('name', 'id');
+        else
+            $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
+
+        $clientToAdd = $id;
+
+        $this->breadcrumbs = [
+            'title' => 'Contratos - '.$contracts[0]['customer']['name'],
+            'page' => 'Registos',
+            'fa' => 'fa-file-text-o'
+        ];
+
+        return view(
+            'admin.contracts.index',
+            $this->breadcrumbs,
+            compact(
+                'contracts',
+                'operators',
+                'customer',
+                'clientToAdd',
+                'callBack'
+            )
+        );
+    }
+
+    public function clientAddContracts($id)
+    {
+        $operators = $this->operatorRepository->all()->pluck('name','id');
+
+        $contracts = $this->contractRepository->with('customer')
+            ->findWhere([['customer_contracts_id', '=', $id]]);
+
+        if(Auth::user()->role == 'admin')
+            $customer = $this->customerContractsRepository->all()->pluck('name', 'id');
+        else
+            $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
+
+
+        $clientToAdd = $id;
+
+        return view(
+            'admin.contracts.index',
+            $this->breadcrumbs,
+            compact(
+                'contracts',
+                'operators',
+                'customer',
+                'clientToAdd',
+                'callBack'
+            )
+        );
+    }
+
     public function store(ContractRequest $contractRequest)
     {
         $contractRequest['start_date'] = Carbon::createFromFormat('d/m/Y', $contractRequest['start_date']);

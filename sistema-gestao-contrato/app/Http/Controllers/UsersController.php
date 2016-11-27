@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SgcAdmin\Http\Requests;
 use SgcAdmin\Http\Requests\UsersRequest;
+use SgcAdmin\Repositories\ContractRepository;
+use SgcAdmin\Repositories\CustomerContractsRepository;
 use SgcAdmin\Repositories\UserRepository;
 use SgcAdmin\Services\UsersService;
 
@@ -18,8 +20,19 @@ class UsersController extends Controller
      * @var UsersService
      */
     private $usersService;
+    /**
+     * @var CustomerContractsRepository
+     */
+    private $customerContractsRepository;
 
-    public function __construct(UserRepository $userRepository, UsersService $usersService)
+    /**
+     * UsersController constructor.
+     * @param UserRepository $userRepository
+     * @param UsersService $usersService
+     * @param CustomerContractsRepository $customerContractsRepository
+     * @internal param ContractRepository $contractRepository
+     */
+    public function __construct(UserRepository $userRepository, UsersService $usersService, CustomerContractsRepository $customerContractsRepository)
     {
         $this->breadcrumbs = [
             'title' => 'Utilizadores',
@@ -29,6 +42,7 @@ class UsersController extends Controller
 
         $this->userRepository = $userRepository;
         $this->usersService = $usersService;
+        $this->customerContractsRepository = $customerContractsRepository;
     }
 
     public function index()
@@ -52,8 +66,33 @@ class UsersController extends Controller
         return redirect()->route('admin.user.index');
     }
 
-    public function destroy($id)
+    public function transfer($userToDelete)
     {
+        $users = $this->userRepository->findWhere([['id', '<>', $userToDelete]]);
+
+        return view(
+            'admin.users.index',
+            $this->breadcrumbs,
+            compact('users', 'userToDelete')
+        );
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $contracts = $this->customerContractsRepository->findWhere([['user_id', '=', $id]]);
+
+        $newContracts = null;
+
+        if($contracts->count() > 0) {
+
+            foreach ($contracts as $contract)
+            {
+                $newContracts[] = $contract['user_id'] = $request['userToTransfer'];
+            }
+
+            $this->customerContractsRepository->updateOrCreate([['user_id', '=', $id]], $newContracts);
+        }
+
         $this->userRepository->find($id)->delete();
 
         return redirect()->route('admin.user.index');

@@ -15,6 +15,7 @@
                         <thead>
                         <tr>
                             <th>Cliente</th>
+                            <th>O que contratou?</th>
                             <th>Final do contrato</th>
                             <th>Ação</th>
                         </tr>
@@ -36,7 +37,9 @@
                                 @if(Auth::user()->role == 'admin')
                                     <tr>
                                         <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">{{ $contract['customer']['name'] }}</td>
-
+                                        <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">
+                                            {{ $contract['which_hired'] }}
+                                        </td>
                                         <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">
                                             {{ (getDaysBetweenDates(formatDate($contract['end_date'], 'mdy'))) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Venceu dia '.formatDate($contract['end_date'], 'mdy').'.'}}
                                         </td>
@@ -55,7 +58,9 @@
                                     @if($contract['customer']['user_id'] == Auth::user()->id)
                                         <tr>
                                             <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">{{ $contract['customer']['name'] }}</td>
-
+                                            <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">
+                                                {{ $contract['which_hired'] }}
+                                            </td>
                                             <td onClick="window.location.href='{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}';">
                                                 {{ getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')) > 0 ? getDaysBetweenDates(formatDate($contract['end_date'], 'mdy')).' dias.': 'Venceu dia '.formatDate($contract['end_date'], 'mdy').'.'}}
                                             </td>
@@ -116,6 +121,20 @@
                             <div class="col-xs-12 col-sm-12">
                                 <div class="row">
                                     <div class="form-group contracts col-xs-12">
+                                        @if(isset($clientToAdd) && $clientToAdd != null)
+                                            <input name="customer_contracts_id" type="hidden" value="{{ $clientToAdd }}">
+                                        @else
+                                            @if(isset($contractEdit))
+                                                <input name="customer_contracts_id" type="hidden" value="{{ $contractEdit->customer_contracts_id }}">
+                                            @else
+                                                <div class="form-group">
+                                                    <label>Cliente:</label>
+
+                                                {{ Form::select('customer_contracts_id', $customer, null, ['id'=>'customer_contracts_id', 'class' => 'form-control']) }}
+                                                <!-- /.input group -->
+                                                </div>
+                                            @endif
+                                        @endif
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label class="pull-left">O que contratou?</label>
@@ -150,12 +169,6 @@
                                                 {!! Form::text('end_date', null,['id' => 'end_datemask', 'class' => 'form-control']) !!}
                                             </div>
                                             <!-- /.input group -->
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Cliente:</label>
-
-                                        {{ Form::select('customer_contracts_id', $customer, null, ['id'=>'customer_contracts_id', 'class' => 'form-control']) }}
-                                        <!-- /.input group -->
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
@@ -240,6 +253,12 @@
 
 
     @if(isset($contractEdit))
+        <script>
+            $('#modal-contract').modal('show');
+        </script>
+    @endif
+
+    @if(isset($clientToAdd))
         <script>
             $('#modal-contract').modal('show');
         </script>

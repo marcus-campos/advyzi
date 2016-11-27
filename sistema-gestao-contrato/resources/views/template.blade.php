@@ -50,7 +50,7 @@
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0.0
+            <b>Version</b> {{ env('APP_VERSION', '1.0.0') }}
         </div>
         <strong>Powered by <a href="http://inideia.com">Inideia</a>. 2016 - {{ date('Y') }} </strong>.
     </footer>

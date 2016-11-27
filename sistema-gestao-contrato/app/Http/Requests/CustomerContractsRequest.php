@@ -25,7 +25,7 @@ class CustomerContractsRequest extends FormRequest
     {
         return [
             'nif' => 'unique:customer_contracts',
-            'email' => 'email|unique:users'
+            'email' => 'email|unique:customer_contracts'
         ];
     }
 }

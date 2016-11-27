@@ -72,6 +72,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'ContractsController@edit']);
             Route::get('edit/{id}/{callBack}', ['as' => 'edit.callback', 'uses' => 'ContractsController@edit']);
             Route::put('update/{id}', ['as' => 'update', 'uses' => 'ContractsController@update']);
+            Route::get('client/{id}', ['as' => 'client', 'uses' => 'ContractsController@clientContracts']);
+            Route::get('client/add/{id}', ['as' => 'add', 'uses' => 'ContractsController@clientAddContracts']);
         });
 
         //Operator
@@ -87,7 +89,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'UsersController@index']);
             Route::post('store', ['as' => 'store', 'uses' => 'UsersController@store']);
-            Route::get('destroy/{id}', ['as' => 'delete', 'uses' => 'UsersController@destroy']);
+            Route::get('transfer/{id}', ['as' => 'transfer', 'uses' => 'UsersController@transfer']);
+            Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'UsersController@destroy']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'UsersController@edit']);
             Route::put('update/{id}', ['as' => 'update', 'uses' => 'UsersController@update']);
         });
