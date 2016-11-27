@@ -122,7 +122,7 @@
                             <div class="col-xs-12 col-sm-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label class="pull-left">Transferir clientes para:</label>
+                                        <label class="pull-left">Transferir clientes para: </label>
                                         {!! Form::select('userToTransfer', $users->pluck('name','id'), null,['class' => 'form-control']) !!}
                                     </div>
                                 </div>
