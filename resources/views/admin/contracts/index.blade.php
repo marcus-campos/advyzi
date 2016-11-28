@@ -7,6 +7,10 @@
 
 @section('content')
     <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-contract">{{ isset($contractEdit) ? 'Editar contrato' : 'Novo contrato' }}</a></p>
+
+    @include('vendor.errors.messages')
+    @include('vendor.partials.flash')
+
     <div class="box">
         <div class="box-body">
             <div class="box-body">
@@ -47,7 +51,7 @@
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
                                                 <ul class="dropdown-menu drop-menu-right" role="menu">
-                                                    <li><a href="{{ route('admin.archive.index', ['id' => $contract['id']]) }}" class="text-center">Gestor de arquivos</a></li>
+                                                    <li><a href="{{ route('admin.archive.index', ['id' => $contract['id']]) }}" class="text-center">Gestor de ficheiros</a></li>
                                                     <li class="divider"></li>
                                                     <li><a href="{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}" class="text-center">Editar</a></li>
                                                     <li><a href="{{ route('admin.customer.contract.delete', ['id' => $contract['id']]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
@@ -69,7 +73,7 @@
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">Ações <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
                                                     <ul class="dropdown-menu drop-menu-right" role="menu">
-                                                        <li><a href="{{ route('admin.archive.index', ['id' => $contract['id']]) }}" class="text-center">Gestor de arquivos</a></li>
+                                                        <li><a href="{{ route('admin.archive.index', ['id' => $contract['id']]) }}" class="text-center">Gestor de ficheiros</a></li>
                                                         <li class="divider"></li>
                                                         <li><a href="{{ route('admin.customer.contract.edit', ['id' => $contract['id']]) }}" class="text-center">Editar</a></li>
                                                         <li><a href="{{ route('admin.customer.contract.delete', ['id' => $contract['id']]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>

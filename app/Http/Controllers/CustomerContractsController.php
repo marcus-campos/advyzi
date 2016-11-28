@@ -5,6 +5,7 @@ namespace SgcAdmin\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Session;
 use SgcAdmin\Http\Requests;
 use Carbon\Carbon;
 use SgcAdmin\Http\Requests\CustomerContractsRequest;
@@ -93,11 +94,14 @@ class CustomerContractsController extends Controller
         $contract = $request->all();
        /* $contract['start_date'] = Carbon::createFromFormat('d/m/Y', $contract['start_date']);
         $contract['end_date'] = Carbon::createFromFormat('d/m/Y', $contract['end_date']);*/
-        $contract['user_id'] = Auth::user()->id;
+        if(Auth::user()->role != 'admin')
+            $contract['user_id'] = Auth::user()->id;
 
 
 
         $this->customerContractsRepository->create($contract);
+
+        Session::flash('success', 'Cliente armazenado com sucesso!');
 
         return redirect()->route('admin.contract.index');
     }
@@ -105,6 +109,8 @@ class CustomerContractsController extends Controller
     public function destroy($id)
     {
         $this->customerContractsRepository->find($id)->delete();
+
+        Session::flash('warning', 'Cliente apagado com sucesso!');
 
         return redirect()->route('admin.contract.index');
     }
@@ -152,6 +158,9 @@ class CustomerContractsController extends Controller
         $contract['user_id'] = Auth::user()->id;
 
         $this->customerContractsRepository->update($request->all(), $id);
+
+        Session::flash('success', 'Cliente atualizado com sucesso!');
+
         return redirect()->route('admin.contract.index');
     }
 }

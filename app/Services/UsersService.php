@@ -26,7 +26,10 @@ class UsersService
 
     public function update($request, $id)
     {
-        $request['password'] = bcrypt($request['password']);
+        if($request['password'] == '')
+            unset($request['password']);
+        else
+            $request['password'] = bcrypt($request['password']);
 
         return $this->userRepository->update($request, $id);
     }

@@ -8,6 +8,7 @@
 @section('content')
     <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-user">Novo utilizador</a></p>
     @include('vendor.errors.messages')
+    @include('vendor.partials.flash')
     <div class="box">
         <div class="box-body">
             <div class="box-body">
@@ -112,7 +113,7 @@
     <div id="modal-transfercontracts" class="modal fade" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                {!! Form::open(['route'=> ['admin.user.destroy', 'id' => $userToDelete], 'method'=>'GET']) !!}
+                {!! Form::open(['route'=> ['admin.user.destroy', 'id' => $userToDelete], 'method'=>'POST']) !!}
                 <div class="modal-header">
                     <h4 class="modal-title">Transferir contratos</h4>
                 </div>
@@ -132,7 +133,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="{{ route('admin.user.index') }}" type="button" class="btn btn-default waves-effect">Fechar</a>
-                    <button type="submit" class="btn btn-danger waves-effect waves-light">Deletar</button>
+                    <button type="submit" class="btn btn-danger waves-effect waves-light">Transferir e Apagar</button>
                 </div>
                 {!! Form::close() !!}
             </div><!-- /.modal-content -->

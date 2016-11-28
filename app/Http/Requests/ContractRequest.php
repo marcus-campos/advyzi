@@ -24,7 +24,10 @@ class ContractRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'which_hired' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'operator_id' => 'required'
         ];
     }
 }

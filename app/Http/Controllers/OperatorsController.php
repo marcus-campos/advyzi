@@ -4,6 +4,7 @@ namespace SgcAdmin\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Session;
 use SgcAdmin\Http\Requests;
 use SgcAdmin\Http\Requests\OperatorsRequest;
 use SgcAdmin\Repositories\OperatorRepository;
@@ -39,6 +40,7 @@ class OperatorsController extends Controller
     {
         $this->operatorRepository->create($request->all());
 
+        Session::flash('success', 'Operadora armazenada com sucesso!');
         return redirect()->route('admin.operator.index');
     }
 
@@ -46,6 +48,7 @@ class OperatorsController extends Controller
     {
         $this->operatorRepository->find($id)->delete();
 
+        Session::flash('warning', 'Operadora apagada com sucesso!');
         return redirect()->route('admin.operator.index');
     }
 
@@ -64,6 +67,8 @@ class OperatorsController extends Controller
     public function update(OperatorsRequest $request, $id)
     {
         $this->operatorRepository->update($request->all(), $id);
+
+        Session::flash('success', 'Cliente atualizada com sucesso!');
         return redirect()->route('admin.operator.index');
     }
 }

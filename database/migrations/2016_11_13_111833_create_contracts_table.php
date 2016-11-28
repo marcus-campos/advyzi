@@ -16,7 +16,7 @@ class CreateContractsTable extends Migration
 		Schema::create('contracts', function(Blueprint $table) {
             $table->increments('id');
             $table->string('which_hired');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->unsignedInteger('operator_id');

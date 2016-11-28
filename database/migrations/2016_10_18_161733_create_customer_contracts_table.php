@@ -29,7 +29,7 @@ class CreateCustomerContractsTable extends Migration
         });
 
         Schema::table('customer_contracts', function($table) {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

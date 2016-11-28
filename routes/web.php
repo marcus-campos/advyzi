@@ -90,7 +90,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'UsersController@index']);
             Route::post('store', ['as' => 'store', 'uses' => 'UsersController@store']);
             Route::get('transfer/{id}', ['as' => 'transfer', 'uses' => 'UsersController@transfer']);
-            Route::get('destroy/{id}', ['as' => 'destroy', 'uses' => 'UsersController@destroy']);
+            Route::post('destroy/{id}', ['as' => 'destroy', 'uses' => 'UsersController@destroy']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'UsersController@edit']);
             Route::put('update/{id}', ['as' => 'update', 'uses' => 'UsersController@update']);
         });

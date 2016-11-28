@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use League\Flysystem\Exception;
 use SgcAdmin\Http\Requests;
 use SgcAdmin\Http\Requests\ContractRequest;
@@ -168,6 +169,7 @@ class ContractsController extends Controller
         $contractRequest['end_date'] = Carbon::createFromFormat('d/m/Y', $contractRequest['end_date']);
         $this->contractRepository->create($contractRequest->all());
 
+        Session::flash('success', 'Contrato armazenado com sucesso!');
         return redirect()->route('admin.customer.contract.index');
     }
 
@@ -214,6 +216,9 @@ class ContractsController extends Controller
         $contract['end_date'] = Carbon::createFromFormat('d/m/Y', $contract['end_date']);
 
         $this->contractRepository->update($contract, $id);
+
+        Session::flash('success', 'Contrato atualizado com sucesso!');
+
         return redirect()->route('admin.customer.contract.index');
     }
 
@@ -221,6 +226,7 @@ class ContractsController extends Controller
     {
         $this->contractRepository->find($id)->delete();
 
+        Session::flash('warning', 'Cliente apagado com sucesso!');
         return redirect()->route($callBack);
     }
 

@@ -5,6 +5,7 @@ namespace SgcAdmin\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use SgcAdmin\Http\Requests;
 use SgcAdmin\Http\Requests\UsersRequest;
 use SgcAdmin\Repositories\ContractRepository;
@@ -63,6 +64,7 @@ class UsersController extends Controller
     {
         $this->usersService->store($request->all());
 
+        Session::flash('success', 'Utilizador armazenado com sucesso!');
         return redirect()->route('admin.user.index');
     }
 
@@ -81,19 +83,19 @@ class UsersController extends Controller
     {
         $contracts = $this->customerContractsRepository->findWhere([['user_id', '=', $id]]);
 
-        $newContracts = null;
+        $data['user_id'] = $request['userToTransfer'];
 
         if($contracts->count() > 0) {
-
             foreach ($contracts as $contract)
             {
-                $newContracts[] = $contract['user_id'] = $request['userToTransfer'];
+                $this->customerContractsRepository->update($data, $contract->id);
             }
-
-            $this->customerContractsRepository->updateOrCreate([['user_id', '=', $id]], $newContracts);
         }
 
         $this->userRepository->find($id)->delete();
+
+        Session::flash('warning', 'Utilizador apagado com sucesso!');
+        Session::flash('success', 'Clientes transferidos com sucesso!');
 
         return redirect()->route('admin.user.index');
     }
@@ -118,6 +120,7 @@ class UsersController extends Controller
     {
         $this->usersService->update($request->all(), $id);
 
+        Session::flash('success', 'Utilizador atualizado com sucesso!');
         return redirect()->route('admin.user.index');
     }
 }

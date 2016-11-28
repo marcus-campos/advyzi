@@ -7,6 +7,10 @@
 
 @section('content')
     <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-operator">Nova operadora</a></p>
+
+    @include('vendor.errors.messages')
+    @include('vendor.partials.flash')
+
     <div class="box">
         <div class="box-body">
             <div class="box-body">
