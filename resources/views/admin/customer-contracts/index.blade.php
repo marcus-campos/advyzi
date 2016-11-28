@@ -9,6 +9,7 @@
     <p><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modal-contract">{{ isset($contractEdit) ? 'Editar cliente' : 'Novo cliente' }}</a></p>
 
     @include('vendor.errors.messages')
+    @include('vendor.partials.flash')
 
     <div class="box">
         <div class="box-body">

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use League\Flysystem\Exception;
 use SgcAdmin\Http\Requests;
 use SgcAdmin\Http\Requests\ContractRequest;
 use SgcAdmin\Repositories\ContractRepository;
@@ -80,37 +81,55 @@ class ContractsController extends Controller
 
     public function clientContracts($id, $callBack = '')
     {
-        $operators = $this->operatorRepository->all()->pluck('name','id');
+        try {
+            $operators = $this->operatorRepository->all()->pluck('name', 'id');
 
-        $contracts = $this->contractRepository->with('customer')
-            ->findWhere([['customer_contracts_id', '=', $id]]);
+            $contracts = $this->contractRepository->with('customer')
+                ->findWhere([['customer_contracts_id', '=', $id]]);
 
-        if(Auth::user()->role == 'admin')
-            $customer = $this->customerContractsRepository->all()->pluck('name', 'id');
-        else
-            $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
+            if (Auth::user()->role == 'admin')
+                $customer = $this->customerContractsRepository->all()->pluck('name', 'id');
+            else
+                $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
 
-        $clientToAdd = $id;
-        $clientModal = false;
+            $clientToAdd = $id;
+            $clientModal = false;
 
-        $this->breadcrumbs = [
-            'title' => 'Contratos - '.$contracts[0]['customer']['name'],
-            'page' => 'Registos',
-            'fa' => 'fa-file-text-o'
-        ];
+            if(isset($contracts[0])) {
 
-        return view(
-            'admin.contracts.index',
-            $this->breadcrumbs,
-            compact(
-                'contracts',
-                'operators',
-                'customer',
-                'clientToAdd',
-                'clientModal',
-                'callBack'
-            )
-        );
+                $this->breadcrumbs = [
+                    'title' => 'Contratos - ' . $contracts[0]['customer']['name'],
+                    'page' => 'Registos',
+                    'fa' => 'fa-file-text-o'
+                ];
+            }
+            else
+            {
+                \Session::flash('warning', 'Este cliente não possui contratos.');
+                return redirect()->route('admin.contract.index');
+            }
+
+
+            return view(
+                'admin.contracts.index',
+                $this->breadcrumbs,
+                compact(
+                    'contracts',
+                    'operators',
+                    'customer',
+                    'clientToAdd',
+                    'clientModal',
+                    'callBack'
+                )
+            );
+        }
+        catch (Exception $ex)
+        {
+            \Session::flash('warning', 'Este cliente não possui contratos.');
+            return redirect()->route('admin.contract.index');
+        }
+
+
     }
 
     public function clientAddContracts($id)
