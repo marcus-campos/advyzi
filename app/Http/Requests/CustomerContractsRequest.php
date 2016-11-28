@@ -24,8 +24,15 @@ class CustomerContractsRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required',
             'nif' => 'unique:customer_contracts',
-            'email' => 'email|unique:customer_contracts'
+            'email' => 'email|unique:customer_contracts',
+            'phone' => 'required',
+            'address' => 'required',
+            'zipcode' => 'required',
+            'city' => 'required',
+            'client_type' => 'required',
+            'client_status' => 'required'
         ];
     }
 }

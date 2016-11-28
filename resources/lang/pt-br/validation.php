@@ -106,9 +106,17 @@ return [
     */
 
     'attributes' => [
-        'name' => 'nome',
-        'price' => 'preço',
-        'category_id' => 'categoria'
+        'name' => '\'nome\'',
+        'email' => '\'email\'',
+        'which_hired' => '\'o que contratou\'',
+        'description' => '\'descrição\'',
+        'zipcode' => '\'código postal\'',
+        'phone' => '\'telefone\'',
+        'city' => '\'cidade\'',
+        'client_type' => '\'tipo de cliente\'',
+        'client_status' => '\'estado\'',
+        'address' => '\'endereço\'',
+        'password' => '\'senha\''
     ],
 
 ];
