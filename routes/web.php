@@ -94,5 +94,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'UsersController@edit']);
             Route::put('update/{id}', ['as' => 'update', 'uses' => 'UsersController@update']);
         });
+
+        //User
+        Route::group(['prefix' => 'archive', 'as' => 'archive.'], function () {
+            Route::get('/{id}', ['as' => 'index', 'uses' => 'ArchivesController@index']);
+            Route::post('store/{id}', ['as' => 'store', 'uses' => 'ArchivesController@store']);
+            Route::get('destroy/{id}/{contractId}', ['as' => 'destroy', 'uses' => 'ArchivesController@destroy']);
+        });
     });
 });
