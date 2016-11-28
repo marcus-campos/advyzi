@@ -23,7 +23,7 @@ class CreateArchivesTable extends Migration
 		});
 
         Schema::table('archives', function (Blueprint $table){
-           $table->foreign('contract_id')->references('id')->on('contracts');
+           $table->foreign('contract_id')->references('id')->on('contracts')->onDelete('cascade');
         });
 	}
 

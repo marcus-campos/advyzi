@@ -95,7 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::put('update/{id}', ['as' => 'update', 'uses' => 'UsersController@update']);
         });
 
-        //User
+        //Archives
         Route::group(['prefix' => 'archive', 'as' => 'archive.'], function () {
             Route::get('/{id}', ['as' => 'index', 'uses' => 'ArchivesController@index']);
             Route::post('store/{id}', ['as' => 'store', 'uses' => 'ArchivesController@store']);

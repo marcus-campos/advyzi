@@ -20,7 +20,6 @@ class UsersService
     public function store($request)
     {
         $request['password'] = bcrypt($request['password']);
-        $request['commission'] = str_replace(',', '.', $request['commission']);
 
         return $this->userRepository->create($request);
     }
