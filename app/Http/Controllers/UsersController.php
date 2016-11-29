@@ -5,6 +5,7 @@ namespace SgcAdmin\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use SgcAdmin\Http\Requests;
 use SgcAdmin\Http\Requests\UsersRequest;
@@ -122,5 +123,23 @@ class UsersController extends Controller
 
         Session::flash('success', 'Utilizador atualizado com sucesso!');
         return redirect()->route('admin.user.index');
+    }
+
+    public function changePassword(Request $request)
+    {
+        if(Hash::check($request['oldpassword'], Auth::user()->password)){
+            $data = ['password' => bcrypt($request['password'])];
+
+            $this->userRepository->update($data, Auth::user()->id);
+
+            Session::flash('success', 'Senha alterada com sucesso!');
+            Auth::logout();
+            return redirect()->route('admin.dashboard.index');
+        }
+        else
+        {
+            Session::flash('warning', 'A senha atual está incorreta!');
+            return redirect()->route('admin.dashboard.index');
+        }
     }
 }

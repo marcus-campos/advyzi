@@ -93,6 +93,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('destroy/{id}', ['as' => 'destroy', 'uses' => 'UsersController@destroy']);
             Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'UsersController@edit']);
             Route::put('update/{id}', ['as' => 'update', 'uses' => 'UsersController@update']);
+            Route::post('password/change', ['as' => 'password.change', 'uses' => 'UsersController@changePassword']);
         });
 
         //Archives

@@ -43,6 +43,44 @@
 
         <section>
             @yield('modal')
+
+            <div id="modal-changepassword" class="modal fade" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {!! Form::open(['route'=> 'admin.user.password.change', 'method'=>'POST']) !!}
+                        <div class="modal-header">
+                            <h4 class="modal-title">Alterar senha</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="block-product-detail">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="pull-left">Senha atual: </label>
+                                                {!! Form::password('oldpassword', ['class' => 'form-control']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="pull-left">Nova senha: </label>
+                                                {!! Form::password('password', ['class' => 'form-control']) !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ route('admin.dashboard.index') }}" type="button" class="btn btn-default waves-effect">Fechar</a>
+                            <button type="submit" class="btn btn-info waves-effect waves-light">Alterar</button>
+                        </div>
+                        {!! Form::close() !!}
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+
+            </div><!-- /.box -->
+
         </section>
         <!-- /.content -->
     </div>

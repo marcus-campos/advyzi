@@ -18,10 +18,15 @@
                             <!-- /.row -->
                             <div class="row">
                                 <div class="col-xs-12 text-center">
-                                    <a href="{{ route('auth.logout') }}" class="btn btn-flat">Sair</a>
+                                    <a data-toggle="modal" data-target="#modal-changepassword" class="btn btn-flat">Alterar senha</a>
                                 </div>
                             </div>
                             <!-- /.row -->
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <a href="{{ route('auth.logout') }}" class="btn btn-flat">Sair</a>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </li>

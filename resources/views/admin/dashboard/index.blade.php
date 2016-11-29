@@ -8,7 +8,8 @@
 @section('content')
     <!-- Main content -->
     <section class="content">
-
+        @include('vendor.errors.messages')
+        @include('vendor.partials.flash')
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="info-box">
