@@ -80,8 +80,8 @@
       <file leaf-file-name="LoginController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+            <state relative-caret-position="351">
+              <caret line="46" column="16" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
               <folding>
                 <element signature="e#50#78#0#PHP" expanded="true" />
               </folding>
@@ -429,7 +429,7 @@
       <workItem from="1480247483838" duration="79000" />
       <workItem from="1480286720923" duration="14524000" />
       <workItem from="1480336057090" duration="116000" />
-      <workItem from="1480336395988" duration="12300000" />
+      <workItem from="1480336395988" duration="12335000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1476585910447</created>
@@ -655,11 +655,18 @@
       <option name="project" value="LOCAL" />
       <updated>1480380791453</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="v.1.4.1 - pt4">
+      <created>1480380848188</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1480380848188</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="178274000" />
+    <option name="totallyTimeSpent" value="178309000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="744" extended-state="6" />
@@ -725,7 +732,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Bug sinistro" />
     <MESSAGE value="Resolvido bug" />
     <MESSAGE value="Final commit" />
     <MESSAGE value="Bugfixes 2" />
@@ -750,7 +756,8 @@
     <MESSAGE value="v.1.4.1" />
     <MESSAGE value="v.1.4.1 - pt2" />
     <MESSAGE value="v.1.4.1 - pt3" />
-    <option name="LAST_COMMIT_MESSAGE" value="v.1.4.1 - pt3" />
+    <MESSAGE value="v.1.4.1 - pt4" />
+    <option name="LAST_COMMIT_MESSAGE" value="v.1.4.1 - pt4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1155,8 +1162,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+        <state relative-caret-position="351">
+          <caret line="46" column="16" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
           <folding>
             <element signature="e#50#78#0#PHP" expanded="true" />
           </folding>
