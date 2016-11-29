@@ -77,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LoginController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+            <state relative-caret-position="297">
+              <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
               <folding>
                 <element signature="e#50#78#0#PHP" expanded="true" />
               </folding>
@@ -89,7 +89,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuthenticatesUsers.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AuthenticatesUsers.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
@@ -173,8 +173,8 @@
         <option value="$PROJECT_DIR$/resources/views/admin/dashboard/index.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" />
         <option value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" />
       </list>
     </option>
   </component>
@@ -429,7 +429,7 @@
       <workItem from="1480247483838" duration="79000" />
       <workItem from="1480286720923" duration="14524000" />
       <workItem from="1480336057090" duration="116000" />
-      <workItem from="1480336395988" duration="12239000" />
+      <workItem from="1480336395988" duration="12300000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1476585910447</created>
@@ -648,11 +648,18 @@
       <option name="project" value="LOCAL" />
       <updated>1480380091034</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="v.1.4.1 - pt3">
+      <created>1480380791453</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1480380791453</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="178213000" />
+    <option name="totallyTimeSpent" value="178274000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="744" extended-state="6" />
@@ -718,7 +725,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Users 100%&#10;Operators 100%" />
     <MESSAGE value="Bug sinistro" />
     <MESSAGE value="Resolvido bug" />
     <MESSAGE value="Final commit" />
@@ -743,7 +749,8 @@
     <MESSAGE value="v.1.3.2" />
     <MESSAGE value="v.1.4.1" />
     <MESSAGE value="v.1.4.1 - pt2" />
-    <option name="LAST_COMMIT_MESSAGE" value="v.1.4.1 - pt2" />
+    <MESSAGE value="v.1.4.1 - pt3" />
+    <option name="LAST_COMMIT_MESSAGE" value="v.1.4.1 - pt3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1138,21 +1145,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
-          <folding>
-            <element signature="e#50#78#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+          <folding>
+            <element signature="e#50#78#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
