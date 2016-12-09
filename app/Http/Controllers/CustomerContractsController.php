@@ -163,4 +163,18 @@ class CustomerContractsController extends Controller
 
         return redirect()->route('admin.contract.index');
     }
+
+    public function clientsAdded()
+    {
+        if(Auth::user()->role == 'admin')
+        {
+            $contracts = $this->customerContractsRepository->with('user')->all()->count();
+        }
+        else
+        {
+            $contracts = $this->customerContractsRepository->with('user')->findWhere([['user_id', '=', Auth::user()->id]])->count();
+        }
+
+        return $contracts;
+    }
 }

@@ -46,7 +46,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Upload de arquivos</h4>
+                    <h4 class="modal-title">Carregar ficheiros</h4>
                 </div>
                 <div class="modal-body">
                     <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel='stylesheet' />
@@ -56,7 +56,7 @@
                 <!--<form id="upload" method="post" action="app\controllers\admin\GalleryController@store" enctype="multipart/form-data">-->
                     {!! Form::open(['id' => 'upload', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'files' => true, 'route' => ['admin.archive.store', 'id' => $contractId]]) !!}
                     <div id="drop">
-                        Arreste para cá<br>
+                        Arreste para aqui<br>
 
                         <a>Procurar...</a>
                         <input type="file" name="upl" multiple />

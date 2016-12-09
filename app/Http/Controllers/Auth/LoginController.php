@@ -3,8 +3,10 @@
 namespace SgcAdmin\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use SgcAdmin\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use SgcAdmin\Models\User;
 
 class LoginController extends Controller
 {

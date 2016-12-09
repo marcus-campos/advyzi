@@ -24,6 +24,34 @@
                 </div>
                 <!-- /.info-box -->
             </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-blue"><i class="fa fa-file-text-o"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text text-center">Contratos adicionados</span>
+                        <br>
+                        <span class="info-box-number text-center">{{ contractsAdded() }}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-users"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text text-center">Clientes adicionados</span>
+                        <br>
+                        <span class="info-box-number text-center">{{ clientsAdded() }}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
         </div>
         <div class="row">
             <div class="box">

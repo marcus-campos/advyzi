@@ -83,3 +83,15 @@ function contracts()
     $contract = App::make('SgcAdmin\Http\Controllers\ContractsController');
     return $contract->contracts();
 }
+
+function contractsAdded()
+{
+    $contract = App::make('SgcAdmin\Http\Controllers\ContractsController');
+    return $contract->contractsAdded();
+}
+
+function clientsAdded()
+{
+    $contract = App::make('SgcAdmin\Http\Controllers\CustomerContractsController');
+    return $contract->clientsAdded();
+}

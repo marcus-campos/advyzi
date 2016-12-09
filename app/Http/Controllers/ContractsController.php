@@ -260,4 +260,16 @@ class ContractsController extends Controller
             return 0;
         }
     }
+
+    public function contractsAdded()
+    {
+        if(Auth::user()->role == 'admin') {
+            $contracts = $this->contractRepository->with('customer')->all()->count();
+        }
+        else {
+            $contracts = $this->contractRepository->with('customer')->all()->count();
+        }
+
+        return $contracts;
+    }
 }
