@@ -16,7 +16,7 @@
                     <span class="info-box-icon bg-red"><i class="fa fa-file-text-o"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text text-center">Contratos com menos de 30 dias</span>
+                        <span class="info-box-text text-center">Contratos com menos de {{ env('DAYS_TO_FILTER', 15) }} dias</span>
                         <br>
                         <span class="info-box-number text-center">{{ contracts() }}</span>
                     </div>
@@ -57,7 +57,7 @@
             <div class="box">
                 <div class="box-body">
                     <div class="box-body">
-                        <h3>Contratos com menos de 30 dias</h3>
+                        <h3>Contratos com menos de {{ env('DAYS_TO_FILTER', 15) }} dias</h3>
                         <div>
                             <table id="dt-grid" class="table table-striped toggle-circle m-b-0" data-page-size="10">
                                 <thead>

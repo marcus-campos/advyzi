@@ -37,7 +37,7 @@ class DashboardController extends Controller
     {
         $contracts = $this->contractRepository->with('customer')->findWhere([
             ['end_date', '>', Carbon::now()->toDateString()],
-            ['end_date', '<=', Carbon::now()->addDays(30)->toDateString()]
+            ['end_date', '<=', Carbon::now()->addDays(env('DAYS_TO_FILTER', 15))->toDateString()]
         ]);
 
 
