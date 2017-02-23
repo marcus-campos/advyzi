@@ -9,7 +9,7 @@ function roles()
 {
     if (Auth::user()->role == 'admin'){
         return [
-            'salesman' => 'Vendedor',
+            'lawyer' => 'Advogado',
             'admin' => 'Administrador'
         ];
     }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Gestor Inideia</title>
+    <title>{!! env('BUSINESS_NAME', 'Adevyzi') !!}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -18,9 +18,9 @@
         <!-- Logo -->
         <a href="{{ route('admin.dashboard.index') }}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>G</b>IN</span>
+            <span class="logo-mini"><b>A</b>DV</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Gestor </b>Inideia</span>
+            <span class="logo-lg">{!! env('BUSINESS_NAME', 'Adevyzi') !!}</span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
@@ -90,7 +90,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> {{ env('APP_VERSION', '1.0.0') }}
         </div>
-        <strong>Powered by <a href="http://inideia.com">Inideia</a>. 2016 - {{ date('Y') }} </strong>.
+        <strong>Powered by <a href="http://devyzi.com">Devyzi</a>. 2016 - {{ date('Y') }} </strong>.
     </footer>
 
     <!-- Control Sidebar -->

@@ -18,7 +18,7 @@
                 </li>
                 <li class="treeview">
                     <a href="{{ route('admin.customer.contract.index') }}">
-                        <i class="fa fa-file-text-o"></i> <span>Contratos</span>
+                        <i class="fa fa-file-text-o"></i> <span>Processos</span>
                     </a>
                 </li>
                 @if(Auth::user()->role == 'admin')

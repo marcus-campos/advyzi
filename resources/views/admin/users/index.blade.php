@@ -58,10 +58,10 @@
                     <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
                     @if(isset($userEdit))
                         {!! Form::model($userEdit,['route' => ['admin.user.update', $userEdit->id], 'method'=>'put']) !!}
-                        <h4 class="modal-title">Editar utilizador</h4>
+                        <h4 class="modal-title">Editar usuário</h4>
                     @else
                         {!! Form::open(['route'=>'admin.user.store', 'method'=>'post']) !!}
-                        <h4 class="modal-title">Novo utilizador</h4>
+                        <h4 class="modal-title">Novo usuário</h4>
                     @endif
                 </div>
                 <div class="modal-body">
@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label class="pull-left">Tipo de utilizador:</label>
+                                        <label class="pull-left">Tipo de usuário:</label>
                                         {!! Form::select('role', roles(), null,['class' => 'form-control']) !!}
                                     </div>
                                 </div>

