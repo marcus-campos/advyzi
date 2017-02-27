@@ -23,11 +23,11 @@ class RepositoryServiceProvider extends ServiceProvider
             'SgcAdmin\Repositories\ContractRepositoryEloquent'
         );
 
-        //CustomerContracts
+        //Customer
 
         $this->app->bind(
-            'SgcAdmin\Repositories\CustomerContractsRepository',
-            'SgcAdmin\Repositories\CustomerContractsRepositoryEloquent'
+            'SgcAdmin\Repositories\CustomerRepository',
+            'SgcAdmin\Repositories\CustomerRepositoryEloquent'
         );
 
         //Operator

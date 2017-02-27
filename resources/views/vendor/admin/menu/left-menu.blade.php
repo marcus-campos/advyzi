@@ -12,7 +12,7 @@
                 </li>
                 <li class="header">Menu</li>
                 <li class="treeview">
-                    <a href="{{ route('admin.contract.index') }}">
+                    <a href="{{ route('admin.customer.index') }}">
                         <i class="fa fa-users"></i> <span>Clientes</span>
                     </a>
                 </li>

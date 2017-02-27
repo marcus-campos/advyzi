@@ -52,8 +52,8 @@
                                                     <li><a href="{{ route('admin.customer.contract.client', ['id' => $contract->id]) }}" class="text-center">Ver contratos</a></li>
                                                     <li><a href="{{ route('admin.customer.contract.add', ['id' => $contract->id]) }}" class="text-center">Adicionar contrato</a></li>
                                                     <li class="divider"></li>
-                                                    <li><a href="{{ route('admin.contract.edit', ['id' => $contract->id]) }}" class="text-center">Editar</a></li>
-                                                    <li><a href="{{ route('admin.contract.delete', ['id' => $contract->id]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
+                                                    <li><a href="{{ route('admin.customer.edit', ['id' => $contract->id]) }}" class="text-center">Editar</a></li>
+                                                    <li><a href="{{ route('admin.customer.delete', ['id' => $contract->id]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -68,8 +68,8 @@
                                                     <li><a href="{{ route('admin.customer.contract.client', ['id' => $contract->id]) }}" class="text-center">Ver contratos</a></li>
                                                     <li><a href="{{ route('admin.customer.contract.add', ['id' => $contract->id]) }}" class="text-center">Adicionar contrato</a></li>
                                                     <li class="divider"></li>
-                                                    <li><a href="{{ route('admin.contract.edit', ['id' => $contract->id]) }}" class="text-center">Editar</a></li>
-                                                    <li><a href="{{ route('admin.contract.delete', ['id' => $contract->id]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
+                                                    <li><a href="{{ route('admin.customer.edit', ['id' => $contract->id]) }}" class="text-center">Editar</a></li>
+                                                    <li><a href="{{ route('admin.customer.delete', ['id' => $contract->id]) }}" class="text-center"><span class="text text-danger">Apagar</span></a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -99,13 +99,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <a href="{{ route('admin.contract.index') }}" type="button" class="close" aria-hidden="true">×</a>
+                    <a href="{{ route('admin.customer.index') }}" type="button" class="close" aria-hidden="true">×</a>
                     <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
                     @if(isset($contractEdit))
-                        {!! Form::model($contractEdit,['route' => ['admin.contract.update', $contractEdit->id], 'method'=>'put']) !!}
+                        {!! Form::model($contractEdit,['route' => ['admin.customer.update', $contractEdit->id], 'method'=>'put']) !!}
                         <h4 class="modal-title">Editar cliente</h4>
                     @else
-                        {!! Form::open(['route'=>'admin.contract.store', 'method'=>'post']) !!}
+                        {!! Form::open(['route'=>'admin.customer.store', 'method'=>'post']) !!}
                         <h4 class="modal-title">Novo cliente</h4>
                     @endif
                 </div>
@@ -184,7 +184,7 @@
                 </div>
                 <div class="modal-footer">
                     @if(isset($contractEdit))
-                        <a href="{{ route('admin.contract.index') }}" type="button" class="btn btn-default waves-effect">Fechar</a>
+                        <a href="{{ route('admin.customer.index') }}" type="button" class="btn btn-default waves-effect">Fechar</a>
                     @else
                         <a type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fechar</a>
                     @endif

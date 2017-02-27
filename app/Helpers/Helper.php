@@ -92,6 +92,6 @@ function contractsAdded()
 
 function clientsAdded()
 {
-    $contract = App::make('SgcAdmin\Http\Controllers\CustomerContractsController');
+    $contract = App::make('SgcAdmin\Http\Controllers\CustomerController');
     return $contract->clientsAdded();
 }

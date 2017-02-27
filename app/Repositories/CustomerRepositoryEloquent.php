@@ -4,15 +4,15 @@ namespace SgcAdmin\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use SgcAdmin\Repositories\CustomerContractsRepository;
-use SgcAdmin\Models\CustomerContracts;
-use SgcAdmin\Validators\CustomerContractsValidator;
+use SgcAdmin\Repositories\CustomerRepository;
+use SgcAdmin\Models\Customer;
+//use SgcAdmin\Validators\CustomerContractsValidator;
 
 /**
  * Class CustomerContractsRepositoryEloquent
  * @package namespace SgcAdmin\Repositories;
  */
-class CustomerContractsRepositoryEloquent extends BaseRepository implements CustomerContractsRepository
+class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepository
 {
     /**
      * Specify Model class name
@@ -21,7 +21,7 @@ class CustomerContractsRepositoryEloquent extends BaseRepository implements Cust
      */
     public function model()
     {
-        return CustomerContracts::class;
+        return Customer::class;
     }
 
     

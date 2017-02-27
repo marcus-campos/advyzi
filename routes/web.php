@@ -53,16 +53,16 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'DashboardController@index']);
         });
 
-        //Clients
-        Route::group(['prefix' => 'contract', 'as' => 'contract.'], function () {
-            Route::get('/', ['as' => 'index', 'uses' => 'CustomerContractsController@index']);
-            Route::post('store', ['as' => 'store', 'uses' => 'CustomerContractsController@store']);
-            Route::get('destroy/{id}', ['as' => 'delete', 'uses' => 'CustomerContractsController@destroy']);
-            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CustomerContractsController@edit']);
-            Route::put('update/{id}', ['as' => 'update', 'uses' => 'CustomerContractsController@update']);
+        //Customer
+        Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'CustomerController@index']);
+            Route::post('store', ['as' => 'store', 'uses' => 'CustomerController@store']);
+            Route::get('destroy/{id}', ['as' => 'delete', 'uses' => 'CustomerController@destroy']);
+            Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'CustomerController@edit']);
+            Route::put('update/{id}', ['as' => 'update', 'uses' => 'CustomerController@update']);
         });
 
-        //Customer Contracts
+        //Contracts
 
         Route::group(['prefix' => 'customer/contract', 'as' => 'customer.contract.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'ContractsController@index']);

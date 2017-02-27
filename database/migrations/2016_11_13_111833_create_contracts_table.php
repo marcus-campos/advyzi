@@ -27,7 +27,7 @@ class CreateContractsTable extends Migration
 
         Schema::table('contracts', function (Blueprint $table){
             $table->foreign('operator_id')->references('id')->on('operators')->onDelete('cascade');
-            $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
 	}
 

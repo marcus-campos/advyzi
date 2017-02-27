@@ -8,7 +8,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  * Interface CustomerContractsRepository
  * @package namespace SgcAdmin\Repositories;
  */
-interface CustomerContractsRepository extends RepositoryInterface
+interface CustomerRepository extends RepositoryInterface
 {
     //
 }

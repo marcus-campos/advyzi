@@ -11,16 +11,16 @@ use League\Flysystem\Exception;
 use SgcAdmin\Http\Requests;
 use SgcAdmin\Http\Requests\ContractRequest;
 use SgcAdmin\Repositories\ContractRepository;
-use SgcAdmin\Repositories\CustomerContractsRepository;
+use SgcAdmin\Repositories\CustomerRepository;
 use SgcAdmin\Repositories\OperatorRepository;
 
 class ContractsController extends Controller
 {
     private $breadcrumbs;
     /**
-     * @var CustomerContractsRepository
+     * @var CustomerRepository
      */
-    private $customerContractsRepository;
+    private $customerRepository;
     /**
      * @var ContractRepository
      */
@@ -32,21 +32,21 @@ class ContractsController extends Controller
 
     /**
      * ContractsController constructor.
-     * @param CustomerContractsRepository $customerContractsRepository
+     * @param CustomerRepository $customerRepository
      * @param ContractRepository $contractRepository
      * @param OperatorRepository $operatorRepository
      */
-    public function __construct(CustomerContractsRepository $customerContractsRepository,
+    public function __construct(CustomerRepository $customerRepository,
                                 ContractRepository $contractRepository,
                                 OperatorRepository $operatorRepository)
     {
         $this->breadcrumbs = [
             'title' => 'Contratos',
-            'page' => 'Registos',
+            'page' => 'Registros',
             'fa' => 'fa-file-text-o'
         ];
 
-        $this->customerContractsRepository = $customerContractsRepository;
+        $this->customerRepository = $customerRepository;
         $this->contractRepository = $contractRepository;
         $this->operatorRepository = $operatorRepository;
     }
@@ -64,9 +64,9 @@ class ContractsController extends Controller
         }
 
         if(Auth::user()->role == 'admin')
-            $customer = $this->customerContractsRepository->all()->pluck('name', 'id');
+            $customer = $this->customerRepository->all()->pluck('name', 'id');
         else
-            $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
+            $customer = $this->customerRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
 
 
         return view(
@@ -89,9 +89,9 @@ class ContractsController extends Controller
                 ->findWhere([['customer_contracts_id', '=', $id]]);
 
             if (Auth::user()->role == 'admin')
-                $customer = $this->customerContractsRepository->all()->pluck('name', 'id');
+                $customer = $this->customerRepository->all()->pluck('name', 'id');
             else
-                $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
+                $customer = $this->customerRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
 
             $clientToAdd = $id;
             $clientModal = false;
@@ -141,9 +141,9 @@ class ContractsController extends Controller
             ->findWhere([['customer_contracts_id', '=', $id]]);
 
         if(Auth::user()->role == 'admin')
-            $customer = $this->customerContractsRepository->all()->pluck('name', 'id');
+            $customer = $this->customerRepository->all()->pluck('name', 'id');
         else
-            $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
+            $customer = $this->customerRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
 
 
         $clientToAdd = $id;
@@ -184,9 +184,9 @@ class ContractsController extends Controller
         }
 
         if(Auth::user()->role == 'admin')
-            $customer = $this->customerContractsRepository->all()->pluck('name', 'id');
+            $customer = $this->customerRepository->all()->pluck('name', 'id');
         else
-            $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
+            $customer = $this->customerRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
 
 
         $contractEdit = $this->contractRepository->find($id);
@@ -194,7 +194,7 @@ class ContractsController extends Controller
         $contractEdit->end_date = Carbon::parse($contractEdit->end_date)->format('d-m-Y');
         // dd($contractEdit);
         $operators = $this->operatorRepository->all()->pluck('name','id');
-        $customer = $this->customerContractsRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
+        $customer = $this->customerRepository->findWhere([['user_id', '=', Auth::user()->id]])->pluck('name', 'id');
 
         return view(
             'admin.contracts.index',

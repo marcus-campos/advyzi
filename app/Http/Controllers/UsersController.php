@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 use SgcAdmin\Http\Requests;
 use SgcAdmin\Http\Requests\UsersRequest;
 use SgcAdmin\Repositories\ContractRepository;
-use SgcAdmin\Repositories\CustomerContractsRepository;
+use SgcAdmin\Repositories\CustomerRepository;
 use SgcAdmin\Repositories\UserRepository;
 use SgcAdmin\Services\UsersService;
 
@@ -23,18 +23,18 @@ class UsersController extends Controller
      */
     private $usersService;
     /**
-     * @var CustomerContractsRepository
+     * @var CustomerRepository
      */
-    private $customerContractsRepository;
+    private $customerRepository;
 
     /**
      * UsersController constructor.
      * @param UserRepository $userRepository
      * @param UsersService $usersService
-     * @param CustomerContractsRepository $customerContractsRepository
+     * @param CustomerRepository $customerRepository
      * @internal param ContractRepository $contractRepository
      */
-    public function __construct(UserRepository $userRepository, UsersService $usersService, CustomerContractsRepository $customerContractsRepository)
+    public function __construct(UserRepository $userRepository, UsersService $usersService, CustomerRepository $customerRepository)
     {
         $this->breadcrumbs = [
             'title' => 'Utilizadores',
@@ -44,7 +44,7 @@ class UsersController extends Controller
 
         $this->userRepository = $userRepository;
         $this->usersService = $usersService;
-        $this->customerContractsRepository = $customerContractsRepository;
+        $this->customerRepository = $customerRepository;
     }
 
     public function index()
@@ -82,14 +82,14 @@ class UsersController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $contracts = $this->customerContractsRepository->findWhere([['user_id', '=', $id]]);
+        $contracts = $this->customerRepository->findWhere([['user_id', '=', $id]]);
 
         $data['user_id'] = $request['userToTransfer'];
 
         if($contracts->count() > 0) {
             foreach ($contracts as $contract)
             {
-                $this->customerContractsRepository->update($data, $contract->id);
+                $this->customerRepository->update($data, $contract->id);
             }
         }
 

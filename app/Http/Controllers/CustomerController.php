@@ -10,22 +10,19 @@ use SgcAdmin\Http\Requests;
 use Carbon\Carbon;
 use SgcAdmin\Http\Requests\CustomerContractsRequest;
 use SgcAdmin\Repositories\ContractRepository;
-use SgcAdmin\Repositories\CustomerContractsRepository;
+use SgcAdmin\Repositories\CustomerRepository;
 use SgcAdmin\Repositories\OperatorRepository;
 use SgcAdmin\Repositories\UserRepository;
 
-class CustomerContractsController extends Controller
+class CustomerController extends Controller
 {
     private $breadcrumbs;
     private $operatorRepository;
+  
     /**
-     * @var ContractsRepository
+     * @var CustomerRepository
      */
-    private $contractsRepository;
-    /**
-     * @var CustomerContractsRepository
-     */
-    private $customerContractsRepository;
+    private $customerRepository;
     /**
      * @var ContractRepository
      */
@@ -35,15 +32,15 @@ class CustomerContractsController extends Controller
      */
     private $userRepository;
 
+
     /**
-     * CustomerContractsController constructor.
-     * @param CustomerContractsRepository $customerContractsRepository
+     * CustomerController constructor.
+     * @param \SgcAdmin\Http\Controllers\CustomerRepository $customerRepository
      * @param ContractRepository $contractRepository
      * @param OperatorRepository $operatorRepository
      * @param UserRepository $userRepository
-     * @internal param ContractRepository $contractsRepository
      */
-    public function __construct(CustomerContractsRepository $customerContractsRepository,
+    public function __construct(CustomerRepository $customerRepository,
                                 ContractRepository $contractRepository,
                                 OperatorRepository $operatorRepository,
                                 UserRepository $userRepository)
@@ -55,7 +52,7 @@ class CustomerContractsController extends Controller
         ];
 
         $this->operatorRepository = $operatorRepository;
-        $this->customerContractsRepository = $customerContractsRepository;
+        $this->customerRepository = $customerRepository;
         $this->contractRepository = $contractRepository;
         $this->userRepository = $userRepository;
     }
@@ -64,12 +61,12 @@ class CustomerContractsController extends Controller
     {
         if(Auth::user()->role == 'admin')
         {
-            $contracts = $this->customerContractsRepository->with('user')->all();
+            $contracts = $this->customerRepository->with('user')->all();
             $salesman = $this->userRepository->all()->pluck('name', 'id');
         }
         else
         {
-            $contracts = $this->customerContractsRepository->with('user')->findWhere([['user_id', '=', Auth::user()->id]]);
+            $contracts = $this->customerRepository->with('user')->findWhere([['user_id', '=', Auth::user()->id]]);
         }
 
         $operators = $this->operatorRepository->all()->pluck('name','id');
@@ -99,7 +96,7 @@ class CustomerContractsController extends Controller
 
 
 
-        $this->customerContractsRepository->create($contract);
+        $this->customerRepository->create($contract);
 
         Session::flash('success', 'Cliente armazenado com sucesso!');
 
@@ -108,7 +105,7 @@ class CustomerContractsController extends Controller
 
     public function destroy($id)
     {
-        $this->customerContractsRepository->find($id)->delete();
+        $this->customerRepository->find($id)->delete();
 
         Session::flash('warning', 'Cliente apagado com sucesso!');
 
@@ -119,16 +116,16 @@ class CustomerContractsController extends Controller
     {
         if(Auth::user()->role == 'admin')
         {
-            $contracts = $this->customerContractsRepository->with('contracts')->all();
+            $contracts = $this->customerRepository->with('contracts')->all();
             $salesman = $this->userRepository->all()->pluck('name', 'id');
         }
         else
         {
-            $contracts = $this->customerContractsRepository->with('contracts')->findWhere([['user_id', '=', Auth::user()->id]]);
+            $contracts = $this->customerRepository->with('contracts')->findWhere([['user_id', '=', Auth::user()->id]]);
         }
 
 
-        $contractEdit = $this->customerContractsRepository->find($id);
+        $contractEdit = $this->customerRepository->find($id);
        /* $contractEdit->start_date = Carbon::parse($contractEdit->start_date)->format('d/m/Y');
         $contractEdit->end_date = Carbon::parse($contractEdit->end_date)->format('d/m/Y');*/
        // dd($contractEdit);
@@ -157,7 +154,7 @@ class CustomerContractsController extends Controller
         $contract['end_date'] = Carbon::createFromFormat('Y/m/d', $contract['end_date']);*/
         $contract['user_id'] = Auth::user()->id;
 
-        $this->customerContractsRepository->update($request->all(), $id);
+        $this->customerRepository->update($request->all(), $id);
 
         Session::flash('success', 'Cliente atualizado com sucesso!');
 
@@ -168,11 +165,11 @@ class CustomerContractsController extends Controller
     {
         if(Auth::user()->role == 'admin')
         {
-            $contracts = $this->customerContractsRepository->with('user')->all()->count();
+            $contracts = $this->customerRepository->with('user')->all()->count();
         }
         else
         {
-            $contracts = $this->customerContractsRepository->with('user')->findWhere([['user_id', '=', Auth::user()->id]])->count();
+            $contracts = $this->customerRepository->with('user')->findWhere([['user_id', '=', Auth::user()->id]])->count();
         }
 
         return $contracts;
